@@ -40,16 +40,16 @@ public class ASTree {
 
     public void addNonTerminalNode(Whkcc.SymbolKind symbolKind, int reduceSymbolsNum) {
         List<ASTreeNode> children = new ArrayList<>();
-        ASTreeNode node = new ASTreeNode(symbolKind, latestTerminal.getPosition(), null);
         Stack<ASTreeNode> reverse = new Stack<>();
         for (int i = 0; i < reduceSymbolsNum; i++) {
             ASTreeNode child = nodeStack.pop();
             reverse.push(child);
-            child.setFather(node);
         }
         while (!reverse.empty()) {
             children.add(reverse.pop());
         }
+        Position position = reduceSymbolsNum == 0 ? latestTerminal.getPosition() : children.get(0).getPosition();
+        ASTreeNode node = new ASTreeNode(symbolKind, position, null);
         node.setChildren(children);
         nodeStack.push(node);
         if (node.getSymbolKind() == Whkcc.SymbolKind.S_PROGRAM) {

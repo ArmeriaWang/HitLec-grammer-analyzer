@@ -1,5 +1,5 @@
 function float sqrt(int x) {
-    return 0.1;
+    return -0.1;
 }
 
 function int getMin(int x, int y) {
@@ -11,7 +11,7 @@ function int getMin(int x, int y) {
 }
 
 function int* getMinAddr(int a[], int len) {
-    int i = 0, minVal = 0x7fffffff;
+    int i = -0, minVal = 0x7fffffff;
     int *ret = 0;
     while (i < len) {
         if (a[i] < minVal) {
@@ -57,6 +57,17 @@ function int main() {
     hd_arr[0][1][2] = &edge[3];
 
     edge[99].from_node[1].weight = 1.123e7;
+
+    while (x < 5) {
+        if (y == -1) {
+            y = 2;
+        } else {
+            int a[5];
+            a[0] = x;
+            a[1] = (x - 5) * ((y + 2 * sqrt(z)) + 0x7f);
+            printf("%d\n", a[0] + a[1]);
+        }
+    }
 
     return 0;
 }

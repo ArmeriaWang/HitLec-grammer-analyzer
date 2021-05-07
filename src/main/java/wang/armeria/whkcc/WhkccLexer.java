@@ -21,6 +21,7 @@ public class WhkccLexer implements Whkcc.Lexer {
         InputStreamReader isr = new InputStreamReader(is);
         reader = new BufferedReader(isr);
         tree = new ASTree();
+        tree.addTerminalNode(Whkcc.SymbolKind.S_YYACCEPT, new Position(1, 0), null);
     }
 
     public static WhkccLexer getWhkccLexer() {

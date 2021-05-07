@@ -42,13 +42,15 @@ public class ASTreeNode {
         return new ArrayList<>(children);
     }
 
-    public void setFather(ASTreeNode father) {
-        this.father = father;
-    }
-
     public void setChildren(List<ASTreeNode> children) {
         if (this.children.size() > 0) {
             throw new RuntimeException("This node already have children");
+        }
+        for (ASTreeNode child : children) {
+            if (child.father != null) {
+                throw new IllegalArgumentException();
+            }
+            child.father = this;
         }
         this.children.addAll(children);
     }
