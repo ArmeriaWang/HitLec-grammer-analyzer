@@ -43,10 +43,9 @@ import java.text.MessageFormat;
 /* "Whkcc.y":9  */
 
   import java.io.IOException;
-  import wang.armeria.ast.ASTreeNode;
   import wang.armeria.token.Position;
 
-/* "Whkcc.java":50  */
+/* "Whkcc.java":49  */
 
 /**
  * A Bison parser, automatically generated from <tt>Whkcc.y</tt>.
@@ -139,30 +138,34 @@ public class Whkcc
     S_STATEMENT(51),               /* STATEMENT  */
     S_EXP_R(52),                   /* EXP_R  */
     S_EXP_L(53),                   /* EXP_L  */
-    S_NUMBER(54),                  /* NUMBER  */
-    S_STATEMENT_IF(55),            /* STATEMENT_IF  */
-    S_STATEMENT_ELSE(56),          /* STATEMENT_ELSE  */
-    S_STATEMENT_WHILE(57),         /* STATEMENT_WHILE  */
-    S_WHILE_BODY(58),              /* WHILE_BODY  */
-    S_STATEMENT_VAR_DEF(59),       /* STATEMENT_VAR_DEF  */
-    S_DECLARE_MORE(60),            /* DECLARE_MORE  */
-    S_DECLARE_NON_INITIALIZE(61),  /* DECLARE_NON_INITIALIZE  */
-    S_DECLARE_INITIALIZE(62),      /* DECLARE_INITIALIZE  */
-    S_STATEMENT_ASSIGN(63),        /* STATEMENT_ASSIGN  */
-    S_STATEMENT_STRUCT_DEF(64),    /* STATEMENT_STRUCT_DEF  */
-    S_MORE_STRUCT_MEMBER_DEF(65),  /* MORE_STRUCT_MEMBER_DEF  */
-    S_STRUCT_MEMBER_DEF(66),       /* STRUCT_MEMBER_DEF  */
-    S_DECLARE_MORE_NON_INITIALIZE(67), /* DECLARE_MORE_NON_INITIALIZE  */
-    S_STATEMENT_RETURN(68),        /* STATEMENT_RETURN  */
-    S_FUNC_CALL(69),               /* FUNC_CALL  */
-    S_SEND_FUNC_ARGS(70),          /* SEND_FUNC_ARGS  */
-    S_STATEMENT_FUNC_DEF(71),      /* STATEMENT_FUNC_DEF  */
-    S_RECV_FUNC_ARGS(72),          /* RECV_FUNC_ARGS  */
-    S_SINGLE_RECV_FUNC_ARG(73),    /* SINGLE_RECV_FUNC_ARG  */
-    S_DT_STRUCT(74),               /* DT_STRUCT  */
-    S_DT_POINTER(75),              /* DT_POINTER  */
-    S_VAR_DEF_TYPE(76),            /* VAR_DEF_TYPE  */
-    S_FUNC_DEF_TYPE(77);           /* FUNC_DEF_TYPE  */
+    S_HD_ARRAY(54),                /* HD_ARRAY  */
+    S_MORE_ARRAY_DIM(55),          /* MORE_ARRAY_DIM  */
+    S_NUMBER(56),                  /* NUMBER  */
+    S_STATEMENT_IF(57),            /* STATEMENT_IF  */
+    S_STATEMENT_ELSE(58),          /* STATEMENT_ELSE  */
+    S_STATEMENT_WHILE(59),         /* STATEMENT_WHILE  */
+    S_WHILE_BODY(60),              /* WHILE_BODY  */
+    S_STATEMENT_VAR_DEF(61),       /* STATEMENT_VAR_DEF  */
+    S_DECLARE_MORE(62),            /* DECLARE_MORE  */
+    S_DECLARE_NON_INITIALIZE(63),  /* DECLARE_NON_INITIALIZE  */
+    S_DECLARE_INITIALIZE(64),      /* DECLARE_INITIALIZE  */
+    S_STATEMENT_ASSIGN(65),        /* STATEMENT_ASSIGN  */
+    S_STATEMENT_STRUCT_DEF(66),    /* STATEMENT_STRUCT_DEF  */
+    S_MORE_STRUCT_MEMBER_DEF(67),  /* MORE_STRUCT_MEMBER_DEF  */
+    S_STRUCT_MEMBER_DEF(68),       /* STRUCT_MEMBER_DEF  */
+    S_DECLARE_MORE_NON_INITIALIZE(69), /* DECLARE_MORE_NON_INITIALIZE  */
+    S_STATEMENT_RETURN(70),        /* STATEMENT_RETURN  */
+    S_FUNC_CALL(71),               /* FUNC_CALL  */
+    S_SEND_FUNC_ARGS(72),          /* SEND_FUNC_ARGS  */
+    S_STATEMENT_FUNC_DEF(73),      /* STATEMENT_FUNC_DEF  */
+    S_RECV_FUNC_ARGS(74),          /* RECV_FUNC_ARGS  */
+    S_SINGLE_RECV_FUNC_ARG(75),    /* SINGLE_RECV_FUNC_ARG  */
+    S_RECV_HD_ARRAY(76),           /* RECV_HD_ARRAY  */
+    S_MORE_RECV_HD_ARRAY_DIM(77),  /* MORE_RECV_HD_ARRAY_DIM  */
+    S_DT_STRUCT(78),               /* DT_STRUCT  */
+    S_DT_POINTER(79),              /* DT_POINTER  */
+    S_VAR_DEF_TYPE(80),            /* VAR_DEF_TYPE  */
+    S_FUNC_DEF_TYPE(81);           /* FUNC_DEF_TYPE  */
 
 
     private final int yycode_;
@@ -226,6 +229,8 @@ public class Whkcc
       SymbolKind.S_STATEMENT,
       SymbolKind.S_EXP_R,
       SymbolKind.S_EXP_L,
+      SymbolKind.S_HD_ARRAY,
+      SymbolKind.S_MORE_ARRAY_DIM,
       SymbolKind.S_NUMBER,
       SymbolKind.S_STATEMENT_IF,
       SymbolKind.S_STATEMENT_ELSE,
@@ -246,6 +251,8 @@ public class Whkcc
       SymbolKind.S_STATEMENT_FUNC_DEF,
       SymbolKind.S_RECV_FUNC_ARGS,
       SymbolKind.S_SINGLE_RECV_FUNC_ARG,
+      SymbolKind.S_RECV_HD_ARRAY,
+      SymbolKind.S_MORE_RECV_HD_ARRAY_DIM,
       SymbolKind.S_DT_STRUCT,
       SymbolKind.S_DT_POINTER,
       SymbolKind.S_VAR_DEF_TYPE,
@@ -307,14 +314,15 @@ public class Whkcc
   "LOR", "LAND", "BOR", "BXOR", "APSAND", "EQ", "NE", "LE", "GE", "LT",
   "GT", "PLUS", "MINUS", "STAR", "DIVIDE", "MOD", "GET_ADDR", "POSITIVE",
   "NEGATIVE", "$accept", "PROGRAM", "TOP_STATEMENTS", "STATEMENTS_BLOCK",
-  "STATEMENTS", "STATEMENT", "EXP_R", "EXP_L", "NUMBER", "STATEMENT_IF",
-  "STATEMENT_ELSE", "STATEMENT_WHILE", "WHILE_BODY", "STATEMENT_VAR_DEF",
-  "DECLARE_MORE", "DECLARE_NON_INITIALIZE", "DECLARE_INITIALIZE",
-  "STATEMENT_ASSIGN", "STATEMENT_STRUCT_DEF", "MORE_STRUCT_MEMBER_DEF",
-  "STRUCT_MEMBER_DEF", "DECLARE_MORE_NON_INITIALIZE", "STATEMENT_RETURN",
-  "FUNC_CALL", "SEND_FUNC_ARGS", "STATEMENT_FUNC_DEF", "RECV_FUNC_ARGS",
-  "SINGLE_RECV_FUNC_ARG", "DT_STRUCT", "DT_POINTER", "VAR_DEF_TYPE",
-  "FUNC_DEF_TYPE", null
+  "STATEMENTS", "STATEMENT", "EXP_R", "EXP_L", "HD_ARRAY",
+  "MORE_ARRAY_DIM", "NUMBER", "STATEMENT_IF", "STATEMENT_ELSE",
+  "STATEMENT_WHILE", "WHILE_BODY", "STATEMENT_VAR_DEF", "DECLARE_MORE",
+  "DECLARE_NON_INITIALIZE", "DECLARE_INITIALIZE", "STATEMENT_ASSIGN",
+  "STATEMENT_STRUCT_DEF", "MORE_STRUCT_MEMBER_DEF", "STRUCT_MEMBER_DEF",
+  "DECLARE_MORE_NON_INITIALIZE", "STATEMENT_RETURN", "FUNC_CALL",
+  "SEND_FUNC_ARGS", "STATEMENT_FUNC_DEF", "RECV_FUNC_ARGS",
+  "SINGLE_RECV_FUNC_ARG", "RECV_HD_ARRAY", "MORE_RECV_HD_ARRAY_DIM",
+  "DT_STRUCT", "DT_POINTER", "VAR_DEF_TYPE", "FUNC_DEF_TYPE", null
     };
   }
 
@@ -626,685 +634,713 @@ public class Whkcc
       {
           case 2: /* PROGRAM: TOP_STATEMENTS  */
   if (yyn == 2)
-    /* "Whkcc.y":275  */
+    /* "Whkcc.y":274  */
                          {wl.addNonTerminalNode(SymbolKind.S_PROGRAM, 1);};
   break;
 
 
   case 3: /* TOP_STATEMENTS: STATEMENT_VAR_DEF TOP_STATEMENTS  */
   if (yyn == 3)
-    /* "Whkcc.y":279  */
+    /* "Whkcc.y":278  */
                                            {wl.addNonTerminalNode(SymbolKind.S_TOP_STATEMENTS, 2);};
   break;
 
 
   case 4: /* TOP_STATEMENTS: STATEMENT_FUNC_DEF TOP_STATEMENTS  */
   if (yyn == 4)
-    /* "Whkcc.y":280  */
+    /* "Whkcc.y":279  */
                                             {wl.addNonTerminalNode(SymbolKind.S_TOP_STATEMENTS, 2);};
   break;
 
 
   case 5: /* TOP_STATEMENTS: STATEMENT_STRUCT_DEF TOP_STATEMENTS  */
   if (yyn == 5)
-    /* "Whkcc.y":281  */
+    /* "Whkcc.y":280  */
                                               {wl.addNonTerminalNode(SymbolKind.S_TOP_STATEMENTS, 2);};
   break;
 
 
   case 6: /* TOP_STATEMENTS: %empty  */
   if (yyn == 6)
-    /* "Whkcc.y":282  */
+    /* "Whkcc.y":281  */
           {wl.addNonTerminalNode(SymbolKind.S_TOP_STATEMENTS, 0);};
   break;
 
 
   case 7: /* STATEMENTS_BLOCK: BEGIN STATEMENTS END  */
   if (yyn == 7)
-    /* "Whkcc.y":286  */
+    /* "Whkcc.y":285  */
                                {wl.addNonTerminalNode(SymbolKind.S_STATEMENTS_BLOCK, 3);};
   break;
 
 
   case 8: /* STATEMENTS_BLOCK: BEGIN END  */
   if (yyn == 8)
-    /* "Whkcc.y":287  */
+    /* "Whkcc.y":286  */
                     {wl.addNonTerminalNode(SymbolKind.S_STATEMENTS_BLOCK, 2);};
   break;
 
 
   case 9: /* STATEMENTS: STATEMENT STATEMENTS  */
   if (yyn == 9)
-    /* "Whkcc.y":291  */
+    /* "Whkcc.y":290  */
                                {wl.addNonTerminalNode(SymbolKind.S_STATEMENTS, 2);};
   break;
 
 
   case 10: /* STATEMENTS: STATEMENT  */
   if (yyn == 10)
-    /* "Whkcc.y":292  */
+    /* "Whkcc.y":291  */
                     {wl.addNonTerminalNode(SymbolKind.S_STATEMENTS, 1);};
   break;
 
 
   case 11: /* STATEMENT: STATEMENT_VAR_DEF  */
   if (yyn == 11)
-    /* "Whkcc.y":296  */
+    /* "Whkcc.y":295  */
                             {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 12: /* STATEMENT: STATEMENT_ASSIGN  */
   if (yyn == 12)
-    /* "Whkcc.y":297  */
+    /* "Whkcc.y":296  */
                            {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 13: /* STATEMENT: STATEMENT_IF  */
   if (yyn == 13)
-    /* "Whkcc.y":298  */
+    /* "Whkcc.y":297  */
                        {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 14: /* STATEMENT: STATEMENT_WHILE  */
   if (yyn == 14)
-    /* "Whkcc.y":299  */
+    /* "Whkcc.y":298  */
                           {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 15: /* STATEMENT: STATEMENT_STRUCT_DEF  */
   if (yyn == 15)
-    /* "Whkcc.y":300  */
+    /* "Whkcc.y":299  */
                                {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 16: /* STATEMENT: STATEMENT_RETURN  */
   if (yyn == 16)
-    /* "Whkcc.y":301  */
+    /* "Whkcc.y":300  */
                            {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 17: /* STATEMENT: FUNC_CALL SEMICOLON  */
   if (yyn == 17)
-    /* "Whkcc.y":302  */
+    /* "Whkcc.y":301  */
                               {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 2);};
   break;
 
 
   case 18: /* STATEMENT: SEMICOLON  */
   if (yyn == 18)
-    /* "Whkcc.y":303  */
+    /* "Whkcc.y":302  */
                     {wl.addNonTerminalNode(SymbolKind.S_STATEMENT, 1);};
   break;
 
 
   case 19: /* EXP_R: EXP_R LT EXP_R  */
   if (yyn == 19)
-    /* "Whkcc.y":307  */
+    /* "Whkcc.y":306  */
                          {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 20: /* EXP_R: EXP_R LE EXP_R  */
   if (yyn == 20)
-    /* "Whkcc.y":308  */
+    /* "Whkcc.y":307  */
                          {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 21: /* EXP_R: EXP_R GT EXP_R  */
   if (yyn == 21)
-    /* "Whkcc.y":309  */
+    /* "Whkcc.y":308  */
                          {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 22: /* EXP_R: EXP_R GE EXP_R  */
   if (yyn == 22)
-    /* "Whkcc.y":310  */
+    /* "Whkcc.y":309  */
                          {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 23: /* EXP_R: EXP_R NE EXP_R  */
   if (yyn == 23)
-    /* "Whkcc.y":311  */
+    /* "Whkcc.y":310  */
                          {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 24: /* EXP_R: EXP_R EQ EXP_R  */
   if (yyn == 24)
-    /* "Whkcc.y":312  */
+    /* "Whkcc.y":311  */
                          {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 25: /* EXP_R: EXP_R PLUS EXP_R  */
   if (yyn == 25)
-    /* "Whkcc.y":313  */
+    /* "Whkcc.y":312  */
                            {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 26: /* EXP_R: EXP_R MINUS EXP_R  */
   if (yyn == 26)
-    /* "Whkcc.y":314  */
+    /* "Whkcc.y":313  */
                             {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 27: /* EXP_R: EXP_R STAR EXP_R  */
   if (yyn == 27)
-    /* "Whkcc.y":315  */
+    /* "Whkcc.y":314  */
                            {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 28: /* EXP_R: EXP_R DIVIDE EXP_R  */
   if (yyn == 28)
-    /* "Whkcc.y":316  */
+    /* "Whkcc.y":315  */
                              {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 29: /* EXP_R: EXP_R MOD EXP_R  */
   if (yyn == 29)
-    /* "Whkcc.y":317  */
+    /* "Whkcc.y":316  */
                           {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 30: /* EXP_R: EXP_R LOR EXP_R  */
   if (yyn == 30)
-    /* "Whkcc.y":318  */
+    /* "Whkcc.y":317  */
                           {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 31: /* EXP_R: EXP_R LAND EXP_R  */
   if (yyn == 31)
-    /* "Whkcc.y":319  */
+    /* "Whkcc.y":318  */
                            {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 32: /* EXP_R: EXP_R BOR EXP_R  */
   if (yyn == 32)
-    /* "Whkcc.y":320  */
+    /* "Whkcc.y":319  */
                           {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 33: /* EXP_R: EXP_R BXOR EXP_R  */
   if (yyn == 33)
-    /* "Whkcc.y":321  */
+    /* "Whkcc.y":320  */
                            {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 34: /* EXP_R: EXP_R APSAND EXP_R  */
   if (yyn == 34)
-    /* "Whkcc.y":322  */
+    /* "Whkcc.y":321  */
                              {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
   case 35: /* EXP_R: PLUS EXP_R  */
   if (yyn == 35)
-    /* "Whkcc.y":323  */
+    /* "Whkcc.y":322  */
                                     {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 2);};
   break;
 
 
   case 36: /* EXP_R: MINUS EXP_R  */
   if (yyn == 36)
-    /* "Whkcc.y":324  */
+    /* "Whkcc.y":323  */
                                      {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 2);};
   break;
 
 
   case 37: /* EXP_R: ROUND_LEFT EXP_R ROUND_RIGHT  */
   if (yyn == 37)
-    /* "Whkcc.y":325  */
+    /* "Whkcc.y":324  */
                                         {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
   break;
 
 
-  case 38: /* EXP_R: ID  */
+  case 38: /* EXP_R: EXP_L  */
   if (yyn == 38)
-    /* "Whkcc.y":326  */
-             {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);};
+    /* "Whkcc.y":325  */
+                {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);};
   break;
 
 
-  case 39: /* EXP_R: ID SQUARE_LEFT EXP_R SQUARE_RIGHT  */
+  case 39: /* EXP_R: APSAND EXP_L  */
   if (yyn == 39)
-    /* "Whkcc.y":327  */
-                                            {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 4);};
-  break;
-
-
-  case 40: /* EXP_R: ID SQUARE_LEFT EXP_R SQUARE_RIGHT DOT ID  */
-  if (yyn == 40)
-    /* "Whkcc.y":328  */
-                                                   {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 6);};
-  break;
-
-
-  case 41: /* EXP_R: ID DOT ID  */
-  if (yyn == 41)
-    /* "Whkcc.y":329  */
-                    {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);};
-  break;
-
-
-  case 42: /* EXP_R: APSAND EXP_L  */
-  if (yyn == 42)
-    /* "Whkcc.y":330  */
+    /* "Whkcc.y":326  */
                                       {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 2);};
   break;
 
 
-  case 43: /* EXP_R: CONST_STRING  */
-  if (yyn == 43)
-    /* "Whkcc.y":331  */
+  case 40: /* EXP_R: CONST_STRING  */
+  if (yyn == 40)
+    /* "Whkcc.y":327  */
                        {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);};
   break;
 
 
-  case 44: /* EXP_R: NUMBER  */
-  if (yyn == 44)
-    /* "Whkcc.y":332  */
+  case 41: /* EXP_R: NUMBER  */
+  if (yyn == 41)
+    /* "Whkcc.y":328  */
                  {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);};
   break;
 
 
-  case 45: /* EXP_R: FUNC_CALL  */
-  if (yyn == 45)
-    /* "Whkcc.y":333  */
+  case 42: /* EXP_R: FUNC_CALL  */
+  if (yyn == 42)
+    /* "Whkcc.y":329  */
                     {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);};
   break;
 
 
-  case 47: /* EXP_L: ID  */
-  if (yyn == 47)
-    /* "Whkcc.y":337  */
+  case 43: /* EXP_L: ID  */
+  if (yyn == 43)
+    /* "Whkcc.y":333  */
              {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 1);};
   break;
 
 
-  case 48: /* EXP_L: ID SQUARE_LEFT EXP_R SQUARE_RIGHT  */
-  if (yyn == 48)
-    /* "Whkcc.y":338  */
-                                            {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 4);};
+  case 44: /* EXP_L: ID DOT EXP_L  */
+  if (yyn == 44)
+    /* "Whkcc.y":334  */
+                       {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 3);};
   break;
 
 
-  case 49: /* EXP_L: ID SQUARE_LEFT EXP_R SQUARE_RIGHT DOT ID  */
-  if (yyn == 49)
-    /* "Whkcc.y":339  */
-                                                   {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 6);};
+  case 45: /* EXP_L: HD_ARRAY  */
+  if (yyn == 45)
+    /* "Whkcc.y":335  */
+                   {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 1);};
   break;
 
 
-  case 50: /* EXP_L: ID DOT ID  */
-  if (yyn == 50)
+  case 46: /* EXP_L: HD_ARRAY DOT EXP_L  */
+  if (yyn == 46)
+    /* "Whkcc.y":336  */
+                             {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 3);};
+  break;
+
+
+  case 47: /* HD_ARRAY: ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM  */
+  if (yyn == 47)
     /* "Whkcc.y":340  */
-                    {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 3);};
+                                                           {wl.addNonTerminalNode(SymbolKind.S_HD_ARRAY, 5);};
   break;
 
 
-  case 51: /* NUMBER: CONST_INTEGER  */
-  if (yyn == 51)
+  case 48: /* MORE_ARRAY_DIM: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM  */
+  if (yyn == 48)
     /* "Whkcc.y":344  */
-                        {wl.addNonTerminalNode(SymbolKind.S_NUMBER, 1);};
+                                                        {wl.addNonTerminalNode(SymbolKind.S_MORE_ARRAY_DIM, 4);};
   break;
 
 
-  case 52: /* NUMBER: CONST_BOOLEAN  */
-  if (yyn == 52)
+  case 49: /* MORE_ARRAY_DIM: %empty  */
+  if (yyn == 49)
     /* "Whkcc.y":345  */
+          {wl.addNonTerminalNode(SymbolKind.S_MORE_ARRAY_DIM, 0);};
+  break;
+
+
+  case 50: /* NUMBER: CONST_INTEGER  */
+  if (yyn == 50)
+    /* "Whkcc.y":349  */
                         {wl.addNonTerminalNode(SymbolKind.S_NUMBER, 1);};
   break;
 
 
-  case 53: /* NUMBER: CONST_FLOAT  */
-  if (yyn == 53)
-    /* "Whkcc.y":346  */
+  case 51: /* NUMBER: CONST_BOOLEAN  */
+  if (yyn == 51)
+    /* "Whkcc.y":350  */
+                        {wl.addNonTerminalNode(SymbolKind.S_NUMBER, 1);};
+  break;
+
+
+  case 52: /* NUMBER: CONST_FLOAT  */
+  if (yyn == 52)
+    /* "Whkcc.y":351  */
                       {wl.addNonTerminalNode(SymbolKind.S_NUMBER, 1);};
   break;
 
 
-  case 54: /* STATEMENT_IF: IF ROUND_LEFT EXP_R ROUND_RIGHT STATEMENTS_BLOCK STATEMENT_ELSE  */
-  if (yyn == 54)
-    /* "Whkcc.y":350  */
+  case 53: /* STATEMENT_IF: IF ROUND_LEFT EXP_R ROUND_RIGHT STATEMENTS_BLOCK STATEMENT_ELSE  */
+  if (yyn == 53)
+    /* "Whkcc.y":355  */
                                                                           {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_IF, 6);};
   break;
 
 
-  case 55: /* STATEMENT_ELSE: ELSE STATEMENTS_BLOCK  */
-  if (yyn == 55)
-    /* "Whkcc.y":354  */
+  case 54: /* STATEMENT_ELSE: ELSE STATEMENTS_BLOCK  */
+  if (yyn == 54)
+    /* "Whkcc.y":359  */
                                 {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_ELSE, 2);};
   break;
 
 
-  case 56: /* STATEMENT_ELSE: ELSE STATEMENT_IF  */
-  if (yyn == 56)
-    /* "Whkcc.y":355  */
+  case 55: /* STATEMENT_ELSE: ELSE STATEMENT_IF  */
+  if (yyn == 55)
+    /* "Whkcc.y":360  */
                             {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_ELSE, 2);};
   break;
 
 
-  case 57: /* STATEMENT_ELSE: %empty  */
-  if (yyn == 57)
-    /* "Whkcc.y":356  */
+  case 56: /* STATEMENT_ELSE: %empty  */
+  if (yyn == 56)
+    /* "Whkcc.y":361  */
           {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_ELSE, 0);};
   break;
 
 
-  case 58: /* STATEMENT_WHILE: WHILE ROUND_LEFT EXP_R ROUND_RIGHT WHILE_BODY  */
-  if (yyn == 58)
-    /* "Whkcc.y":360  */
+  case 57: /* STATEMENT_WHILE: WHILE ROUND_LEFT EXP_R ROUND_RIGHT WHILE_BODY  */
+  if (yyn == 57)
+    /* "Whkcc.y":365  */
                                                         {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_WHILE, 5);};
   break;
 
 
-  case 59: /* WHILE_BODY: STATEMENTS_BLOCK  */
-  if (yyn == 59)
-    /* "Whkcc.y":364  */
+  case 58: /* WHILE_BODY: STATEMENTS_BLOCK  */
+  if (yyn == 58)
+    /* "Whkcc.y":369  */
                            {wl.addNonTerminalNode(SymbolKind.S_WHILE_BODY, 1);};
   break;
 
 
-  case 60: /* WHILE_BODY: STATEMENT  */
-  if (yyn == 60)
-    /* "Whkcc.y":365  */
+  case 59: /* WHILE_BODY: STATEMENT  */
+  if (yyn == 59)
+    /* "Whkcc.y":370  */
                     {wl.addNonTerminalNode(SymbolKind.S_WHILE_BODY, 1);};
   break;
 
 
-  case 61: /* STATEMENT_VAR_DEF: VAR_DEF_TYPE DECLARE_INITIALIZE DECLARE_MORE  */
-  if (yyn == 61)
-    /* "Whkcc.y":369  */
+  case 60: /* STATEMENT_VAR_DEF: VAR_DEF_TYPE DECLARE_INITIALIZE DECLARE_MORE  */
+  if (yyn == 60)
+    /* "Whkcc.y":374  */
                                                        {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_VAR_DEF, 3);};
   break;
 
 
-  case 62: /* STATEMENT_VAR_DEF: VAR_DEF_TYPE DECLARE_NON_INITIALIZE DECLARE_MORE  */
-  if (yyn == 62)
-    /* "Whkcc.y":370  */
+  case 61: /* STATEMENT_VAR_DEF: VAR_DEF_TYPE DECLARE_NON_INITIALIZE DECLARE_MORE  */
+  if (yyn == 61)
+    /* "Whkcc.y":375  */
                                                            {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_VAR_DEF, 3);};
   break;
 
 
-  case 63: /* DECLARE_MORE: SEMICOLON  */
-  if (yyn == 63)
-    /* "Whkcc.y":374  */
+  case 62: /* DECLARE_MORE: SEMICOLON  */
+  if (yyn == 62)
+    /* "Whkcc.y":379  */
                     {wl.addNonTerminalNode(SymbolKind.S_DECLARE_MORE, 1);};
   break;
 
 
-  case 64: /* DECLARE_MORE: COMMA DECLARE_INITIALIZE DECLARE_MORE  */
-  if (yyn == 64)
-    /* "Whkcc.y":375  */
+  case 63: /* DECLARE_MORE: COMMA DECLARE_INITIALIZE DECLARE_MORE  */
+  if (yyn == 63)
+    /* "Whkcc.y":380  */
                                                 {wl.addNonTerminalNode(SymbolKind.S_DECLARE_MORE, 3);};
   break;
 
 
-  case 65: /* DECLARE_MORE: COMMA DECLARE_NON_INITIALIZE DECLARE_MORE  */
-  if (yyn == 65)
-    /* "Whkcc.y":376  */
+  case 64: /* DECLARE_MORE: COMMA DECLARE_NON_INITIALIZE DECLARE_MORE  */
+  if (yyn == 64)
+    /* "Whkcc.y":381  */
                                                     {wl.addNonTerminalNode(SymbolKind.S_DECLARE_MORE, 3);};
   break;
 
 
-  case 66: /* DECLARE_NON_INITIALIZE: ID  */
-  if (yyn == 66)
-    /* "Whkcc.y":380  */
+  case 65: /* DECLARE_NON_INITIALIZE: ID  */
+  if (yyn == 65)
+    /* "Whkcc.y":385  */
              {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 1);};
   break;
 
 
-  case 67: /* DECLARE_NON_INITIALIZE: STAR ID  */
-  if (yyn == 67)
-    /* "Whkcc.y":381  */
+  case 66: /* DECLARE_NON_INITIALIZE: STAR ID  */
+  if (yyn == 66)
+    /* "Whkcc.y":386  */
                   {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 2);};
   break;
 
 
-  case 68: /* DECLARE_NON_INITIALIZE: ID SQUARE_LEFT CONST_INTEGER SQUARE_RIGHT  */
-  if (yyn == 68)
-    /* "Whkcc.y":382  */
-                                                    {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 4);};
-  break;
-
-
-  case 69: /* DECLARE_NON_INITIALIZE: STAR ID SQUARE_LEFT CONST_INTEGER SQUARE_RIGHT  */
-  if (yyn == 69)
-    /* "Whkcc.y":383  */
-                                                         {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 5);};
-  break;
-
-
-  case 70: /* DECLARE_INITIALIZE: ID ASSIGN EXP_R  */
-  if (yyn == 70)
+  case 67: /* DECLARE_NON_INITIALIZE: HD_ARRAY  */
+  if (yyn == 67)
     /* "Whkcc.y":387  */
+                   {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 1);};
+  break;
+
+
+  case 68: /* DECLARE_NON_INITIALIZE: STAR HD_ARRAY  */
+  if (yyn == 68)
+    /* "Whkcc.y":388  */
+                        {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 2);};
+  break;
+
+
+  case 69: /* DECLARE_INITIALIZE: ID ASSIGN EXP_R  */
+  if (yyn == 69)
+    /* "Whkcc.y":392  */
                           {wl.addNonTerminalNode(SymbolKind.S_DECLARE_INITIALIZE, 3);};
   break;
 
 
-  case 71: /* DECLARE_INITIALIZE: STAR ID ASSIGN EXP_R  */
-  if (yyn == 71)
-    /* "Whkcc.y":388  */
+  case 70: /* DECLARE_INITIALIZE: STAR ID ASSIGN EXP_R  */
+  if (yyn == 70)
+    /* "Whkcc.y":393  */
                                {wl.addNonTerminalNode(SymbolKind.S_DECLARE_INITIALIZE, 4);};
   break;
 
 
-  case 72: /* STATEMENT_ASSIGN: EXP_L ASSIGN EXP_R SEMICOLON  */
-  if (yyn == 72)
-    /* "Whkcc.y":392  */
+  case 71: /* STATEMENT_ASSIGN: EXP_L ASSIGN EXP_R SEMICOLON  */
+  if (yyn == 71)
+    /* "Whkcc.y":397  */
                                        {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_ASSIGN, 4);};
   break;
 
 
-  case 73: /* STATEMENT_STRUCT_DEF: STRUCT ID BEGIN STRUCT_MEMBER_DEF MORE_STRUCT_MEMBER_DEF END SEMICOLON  */
-  if (yyn == 73)
-    /* "Whkcc.y":396  */
+  case 72: /* STATEMENT_STRUCT_DEF: STRUCT ID BEGIN STRUCT_MEMBER_DEF MORE_STRUCT_MEMBER_DEF END SEMICOLON  */
+  if (yyn == 72)
+    /* "Whkcc.y":401  */
                                                                                  {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_STRUCT_DEF, 7);};
   break;
 
 
-  case 74: /* MORE_STRUCT_MEMBER_DEF: STRUCT_MEMBER_DEF MORE_STRUCT_MEMBER_DEF  */
-  if (yyn == 74)
-    /* "Whkcc.y":400  */
+  case 73: /* MORE_STRUCT_MEMBER_DEF: STRUCT_MEMBER_DEF MORE_STRUCT_MEMBER_DEF  */
+  if (yyn == 73)
+    /* "Whkcc.y":405  */
                                                    {wl.addNonTerminalNode(SymbolKind.S_MORE_STRUCT_MEMBER_DEF, 2);};
   break;
 
 
-  case 75: /* MORE_STRUCT_MEMBER_DEF: %empty  */
-  if (yyn == 75)
-    /* "Whkcc.y":401  */
+  case 74: /* MORE_STRUCT_MEMBER_DEF: %empty  */
+  if (yyn == 74)
+    /* "Whkcc.y":406  */
           {wl.addNonTerminalNode(SymbolKind.S_MORE_STRUCT_MEMBER_DEF, 0);};
   break;
 
 
-  case 76: /* STRUCT_MEMBER_DEF: VAR_DEF_TYPE DECLARE_NON_INITIALIZE DECLARE_MORE_NON_INITIALIZE SEMICOLON  */
-  if (yyn == 76)
-    /* "Whkcc.y":405  */
+  case 75: /* STRUCT_MEMBER_DEF: VAR_DEF_TYPE DECLARE_NON_INITIALIZE DECLARE_MORE_NON_INITIALIZE SEMICOLON  */
+  if (yyn == 75)
+    /* "Whkcc.y":410  */
                                                                                     {wl.addNonTerminalNode(SymbolKind.S_STRUCT_MEMBER_DEF, 4);};
   break;
 
 
-  case 77: /* DECLARE_MORE_NON_INITIALIZE: COMMA DECLARE_NON_INITIALIZE DECLARE_MORE_NON_INITIALIZE  */
-  if (yyn == 77)
-    /* "Whkcc.y":409  */
+  case 76: /* DECLARE_MORE_NON_INITIALIZE: COMMA DECLARE_NON_INITIALIZE DECLARE_MORE_NON_INITIALIZE  */
+  if (yyn == 76)
+    /* "Whkcc.y":414  */
                                                                    {wl.addNonTerminalNode(SymbolKind.S_DECLARE_MORE_NON_INITIALIZE, 3);};
   break;
 
 
-  case 78: /* DECLARE_MORE_NON_INITIALIZE: %empty  */
-  if (yyn == 78)
-    /* "Whkcc.y":410  */
+  case 77: /* DECLARE_MORE_NON_INITIALIZE: %empty  */
+  if (yyn == 77)
+    /* "Whkcc.y":415  */
           {wl.addNonTerminalNode(SymbolKind.S_DECLARE_MORE_NON_INITIALIZE, 0);};
   break;
 
 
-  case 79: /* STATEMENT_RETURN: RETURN EXP_R SEMICOLON  */
-  if (yyn == 79)
-    /* "Whkcc.y":414  */
+  case 78: /* STATEMENT_RETURN: RETURN EXP_R SEMICOLON  */
+  if (yyn == 78)
+    /* "Whkcc.y":419  */
                                  {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_RETURN, 3);};
   break;
 
 
-  case 80: /* FUNC_CALL: ID ROUND_LEFT EXP_R SEND_FUNC_ARGS ROUND_RIGHT  */
-  if (yyn == 80)
-    /* "Whkcc.y":418  */
+  case 79: /* FUNC_CALL: ID ROUND_LEFT EXP_R SEND_FUNC_ARGS ROUND_RIGHT  */
+  if (yyn == 79)
+    /* "Whkcc.y":423  */
                                                          {wl.addNonTerminalNode(SymbolKind.S_FUNC_CALL, 5);};
   break;
 
 
-  case 81: /* FUNC_CALL: ID ROUND_LEFT ROUND_RIGHT  */
-  if (yyn == 81)
-    /* "Whkcc.y":419  */
+  case 80: /* FUNC_CALL: ID ROUND_LEFT ROUND_RIGHT  */
+  if (yyn == 80)
+    /* "Whkcc.y":424  */
                                     {wl.addNonTerminalNode(SymbolKind.S_FUNC_CALL, 3);};
   break;
 
 
-  case 82: /* SEND_FUNC_ARGS: COMMA EXP_R SEND_FUNC_ARGS  */
-  if (yyn == 82)
-    /* "Whkcc.y":423  */
+  case 81: /* SEND_FUNC_ARGS: COMMA EXP_R SEND_FUNC_ARGS  */
+  if (yyn == 81)
+    /* "Whkcc.y":428  */
                                      {wl.addNonTerminalNode(SymbolKind.S_SEND_FUNC_ARGS, 3);};
   break;
 
 
-  case 83: /* SEND_FUNC_ARGS: %empty  */
-  if (yyn == 83)
-    /* "Whkcc.y":424  */
+  case 82: /* SEND_FUNC_ARGS: %empty  */
+  if (yyn == 82)
+    /* "Whkcc.y":429  */
           {wl.addNonTerminalNode(SymbolKind.S_SEND_FUNC_ARGS, 0);};
   break;
 
 
-  case 84: /* STATEMENT_FUNC_DEF: FUNCTION FUNC_DEF_TYPE ID ROUND_LEFT ROUND_RIGHT STATEMENTS_BLOCK  */
-  if (yyn == 84)
-    /* "Whkcc.y":428  */
+  case 83: /* STATEMENT_FUNC_DEF: FUNCTION FUNC_DEF_TYPE ID ROUND_LEFT ROUND_RIGHT STATEMENTS_BLOCK  */
+  if (yyn == 83)
+    /* "Whkcc.y":433  */
                                                                             {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_FUNC_DEF, 6);};
   break;
 
 
-  case 85: /* STATEMENT_FUNC_DEF: FUNCTION FUNC_DEF_TYPE ID ROUND_LEFT SINGLE_RECV_FUNC_ARG RECV_FUNC_ARGS ROUND_RIGHT STATEMENTS_BLOCK  */
-  if (yyn == 85)
-    /* "Whkcc.y":429  */
+  case 84: /* STATEMENT_FUNC_DEF: FUNCTION FUNC_DEF_TYPE ID ROUND_LEFT SINGLE_RECV_FUNC_ARG RECV_FUNC_ARGS ROUND_RIGHT STATEMENTS_BLOCK  */
+  if (yyn == 84)
+    /* "Whkcc.y":434  */
                                                                                                                 {wl.addNonTerminalNode(SymbolKind.S_STATEMENT_FUNC_DEF, 8);};
   break;
 
 
-  case 86: /* RECV_FUNC_ARGS: COMMA SINGLE_RECV_FUNC_ARG RECV_FUNC_ARGS  */
-  if (yyn == 86)
-    /* "Whkcc.y":433  */
+  case 85: /* RECV_FUNC_ARGS: COMMA SINGLE_RECV_FUNC_ARG RECV_FUNC_ARGS  */
+  if (yyn == 85)
+    /* "Whkcc.y":438  */
                                                     {wl.addNonTerminalNode(SymbolKind.S_RECV_FUNC_ARGS, 3);};
   break;
 
 
-  case 87: /* RECV_FUNC_ARGS: %empty  */
-  if (yyn == 87)
-    /* "Whkcc.y":434  */
+  case 86: /* RECV_FUNC_ARGS: %empty  */
+  if (yyn == 86)
+    /* "Whkcc.y":439  */
           {wl.addNonTerminalNode(SymbolKind.S_RECV_FUNC_ARGS, 0);};
   break;
 
 
-  case 88: /* SINGLE_RECV_FUNC_ARG: FUNC_DEF_TYPE ID  */
-  if (yyn == 88)
-    /* "Whkcc.y":438  */
+  case 87: /* SINGLE_RECV_FUNC_ARG: FUNC_DEF_TYPE ID  */
+  if (yyn == 87)
+    /* "Whkcc.y":443  */
                            {wl.addNonTerminalNode(SymbolKind.S_SINGLE_RECV_FUNC_ARG, 2);};
   break;
 
 
-  case 89: /* SINGLE_RECV_FUNC_ARG: FUNC_DEF_TYPE ID SQUARE_LEFT SQUARE_RIGHT  */
-  if (yyn == 89)
-    /* "Whkcc.y":439  */
-                                                    {wl.addNonTerminalNode(SymbolKind.S_SINGLE_RECV_FUNC_ARG, 4);};
+  case 88: /* SINGLE_RECV_FUNC_ARG: FUNC_DEF_TYPE RECV_HD_ARRAY  */
+  if (yyn == 88)
+    /* "Whkcc.y":444  */
+                                      {wl.addNonTerminalNode(SymbolKind.S_SINGLE_RECV_FUNC_ARG, 2);};
   break;
 
 
-  case 90: /* DT_STRUCT: STRUCT ID  */
+  case 89: /* RECV_HD_ARRAY: ID SQUARE_LEFT SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM  */
+  if (yyn == 89)
+    /* "Whkcc.y":448  */
+                                                             {wl.addNonTerminalNode(SymbolKind.S_RECV_HD_ARRAY, 4);};
+  break;
+
+
+  case 90: /* RECV_HD_ARRAY: ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM  */
   if (yyn == 90)
-    /* "Whkcc.y":443  */
+    /* "Whkcc.y":449  */
+                                                                   {wl.addNonTerminalNode(SymbolKind.S_RECV_HD_ARRAY, 5);};
+  break;
+
+
+  case 91: /* MORE_RECV_HD_ARRAY_DIM: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM  */
+  if (yyn == 91)
+    /* "Whkcc.y":453  */
+                                                                {wl.addNonTerminalNode(SymbolKind.S_MORE_RECV_HD_ARRAY_DIM, 4);};
+  break;
+
+
+  case 92: /* MORE_RECV_HD_ARRAY_DIM: %empty  */
+  if (yyn == 92)
+    /* "Whkcc.y":454  */
+          {wl.addNonTerminalNode(SymbolKind.S_MORE_RECV_HD_ARRAY_DIM, 0);};
+  break;
+
+
+  case 93: /* DT_STRUCT: STRUCT ID  */
+  if (yyn == 93)
+    /* "Whkcc.y":458  */
                     {wl.addNonTerminalNode(SymbolKind.S_DT_STRUCT, 2);};
   break;
 
 
-  case 91: /* DT_POINTER: VAR_DEF_TYPE STAR  */
-  if (yyn == 91)
-    /* "Whkcc.y":447  */
+  case 94: /* DT_POINTER: VAR_DEF_TYPE STAR  */
+  if (yyn == 94)
+    /* "Whkcc.y":462  */
                             {wl.addNonTerminalNode(SymbolKind.S_DT_POINTER, 2);};
   break;
 
 
-  case 92: /* VAR_DEF_TYPE: DT_INTEGER  */
-  if (yyn == 92)
-    /* "Whkcc.y":451  */
+  case 95: /* VAR_DEF_TYPE: DT_INTEGER  */
+  if (yyn == 95)
+    /* "Whkcc.y":466  */
                      {wl.addNonTerminalNode(SymbolKind.S_VAR_DEF_TYPE, 1);};
   break;
 
 
-  case 93: /* VAR_DEF_TYPE: DT_FLOAT  */
-  if (yyn == 93)
-    /* "Whkcc.y":452  */
+  case 96: /* VAR_DEF_TYPE: DT_FLOAT  */
+  if (yyn == 96)
+    /* "Whkcc.y":467  */
                    {wl.addNonTerminalNode(SymbolKind.S_VAR_DEF_TYPE, 1);};
   break;
 
 
-  case 94: /* VAR_DEF_TYPE: DT_BOOLEAN  */
-  if (yyn == 94)
-    /* "Whkcc.y":453  */
+  case 97: /* VAR_DEF_TYPE: DT_BOOLEAN  */
+  if (yyn == 97)
+    /* "Whkcc.y":468  */
                      {wl.addNonTerminalNode(SymbolKind.S_VAR_DEF_TYPE, 1);};
   break;
 
 
-  case 95: /* VAR_DEF_TYPE: DT_STRUCT  */
-  if (yyn == 95)
-    /* "Whkcc.y":454  */
+  case 98: /* VAR_DEF_TYPE: DT_STRUCT  */
+  if (yyn == 98)
+    /* "Whkcc.y":469  */
                     {wl.addNonTerminalNode(SymbolKind.S_VAR_DEF_TYPE, 1);};
   break;
 
 
-  case 96: /* FUNC_DEF_TYPE: DT_INTEGER  */
-  if (yyn == 96)
-    /* "Whkcc.y":458  */
+  case 99: /* FUNC_DEF_TYPE: DT_INTEGER  */
+  if (yyn == 99)
+    /* "Whkcc.y":473  */
                      {wl.addNonTerminalNode(SymbolKind.S_FUNC_DEF_TYPE, 1);};
   break;
 
 
-  case 97: /* FUNC_DEF_TYPE: DT_FLOAT  */
-  if (yyn == 97)
-    /* "Whkcc.y":459  */
+  case 100: /* FUNC_DEF_TYPE: DT_FLOAT  */
+  if (yyn == 100)
+    /* "Whkcc.y":474  */
                    {wl.addNonTerminalNode(SymbolKind.S_FUNC_DEF_TYPE, 1);};
   break;
 
 
-  case 98: /* FUNC_DEF_TYPE: DT_BOOLEAN  */
-  if (yyn == 98)
-    /* "Whkcc.y":460  */
+  case 101: /* FUNC_DEF_TYPE: DT_BOOLEAN  */
+  if (yyn == 101)
+    /* "Whkcc.y":475  */
                      {wl.addNonTerminalNode(SymbolKind.S_FUNC_DEF_TYPE, 1);};
   break;
 
 
-  case 99: /* FUNC_DEF_TYPE: DT_POINTER  */
-  if (yyn == 99)
-    /* "Whkcc.y":461  */
+  case 102: /* FUNC_DEF_TYPE: DT_POINTER  */
+  if (yyn == 102)
+    /* "Whkcc.y":476  */
                      {wl.addNonTerminalNode(SymbolKind.S_FUNC_DEF_TYPE, 1);};
   break;
 
 
 
-/* "Whkcc.java":1308  */
+/* "Whkcc.java":1344  */
 
         default: break;
       }
@@ -1718,8 +1754,8 @@ public class Whkcc
     return yyvalue == yytable_ninf_;
   }
 
-  private static final short yypact_ninf_ = -129;
-  private static final short yytable_ninf_ = -99;
+  private static final short yypact_ninf_ = -170;
+  private static final short yytable_ninf_ = -102;
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
@@ -1728,26 +1764,26 @@ public class Whkcc
   {
     return new short[]
     {
-     102,  -129,  -129,  -129,   -12,    77,    24,  -129,   102,   102,
-     102,  -129,   -15,    27,    40,    45,    59,    61,  -129,    46,
-      79,  -129,  -129,  -129,  -129,    32,    83,     1,     1,   162,
-    -129,  -129,    94,   108,    78,    37,  -129,   -15,  -129,  -129,
-     162,    10,    97,    98,  -129,  -129,  -129,  -129,    47,    78,
-     155,    78,    78,   318,  -129,  -129,   183,    78,     1,     1,
-     175,   162,   179,   194,   198,   195,   202,   206,  -129,   207,
-      58,    78,   200,    43,  -129,  -129,  -129,    78,    78,    78,
-      78,    78,    78,    78,    78,    78,    78,    78,    78,    78,
-      78,    78,    78,   221,   318,  -129,  -129,   208,  -129,   223,
-      10,   229,   201,  -129,    77,   203,   225,  -129,  -129,   146,
-     282,  -129,   232,    78,   333,   347,   360,   372,   383,   105,
-     105,   -26,   -26,   -26,   -26,   157,   157,  -129,  -129,  -129,
-    -129,  -129,   198,  -129,   246,   247,    78,   150,  -129,  -129,
-     243,   186,   267,  -129,  -129,  -129,  -129,  -129,  -129,   252,
-     202,   195,   272,    78,   249,   277,  -129,   302,  -129,    78,
-      78,    95,  -129,  -129,    78,  -129,  -129,  -129,  -129,   146,
-    -129,   281,   279,   222,   244,  -129,   121,  -129,  -129,   283,
-     284,   195,  -129,  -129,  -129,  -129,  -129,   293,     3,  -129,
-    -129,  -129
+      80,  -170,  -170,  -170,    -2,   103,    16,  -170,    80,    80,
+      80,  -170,    -9,     0,    13,    17,    46,    48,  -170,   -18,
+      53,  -170,  -170,  -170,  -170,     1,    60,  -170,    72,    72,
+     108,  -170,  -170,    58,   150,   150,     8,  -170,  -170,    -9,
+    -170,  -170,   108,    -8,     7,  -170,  -170,  -170,  -170,    51,
+     150,    71,   150,   150,   335,  -170,    74,  -170,  -170,   411,
+     150,    72,    72,    69,   108,    82,   100,    99,   110,   118,
+     119,    71,   117,   253,    55,  -170,  -170,  -170,   125,   150,
+     150,   150,   150,   150,   150,   150,   150,   150,   150,   150,
+     150,   150,   150,   150,   150,    71,   411,  -170,  -170,   122,
+    -170,    82,    -8,   123,   254,  -170,   103,   131,   132,  -170,
+    -170,  -170,   214,  -170,   150,  -170,   426,   440,   453,   465,
+     476,   173,   173,    59,    59,    59,    59,    85,    85,  -170,
+    -170,  -170,  -170,  -170,    99,  -170,   137,   138,   150,  -170,
+    -170,   134,   168,   141,  -170,  -170,  -170,  -170,  -170,  -170,
+     143,   118,   110,   130,   150,   156,   355,  -170,   150,   150,
+     163,  -170,  -170,   150,  -170,  -170,  -170,   157,   375,   214,
+    -170,   125,   275,   297,  -170,   189,   150,  -170,   157,  -170,
+    -170,   337,   110,  -170,   395,  -170,  -170,  -170,  -170,   174,
+     157,    12,  -170,  -170,  -170,  -170
     };
   }
 
@@ -1759,26 +1795,26 @@ public class Whkcc
   {
     return new byte[]
     {
-       6,    92,    94,    93,     0,     0,     0,     2,     6,     6,
-       6,    95,     0,    90,    92,    94,    93,     0,    99,     0,
-       0,     1,     3,     5,     4,    66,     0,     0,     0,     0,
-      90,    91,     0,     0,     0,    67,    63,     0,    62,    61,
-      75,     0,     0,     0,    51,    53,    43,    52,    38,     0,
-      46,     0,     0,    70,    44,    45,     0,     0,     0,     0,
-       0,    75,    66,     0,    78,     0,    87,     0,    68,     0,
-       0,     0,     0,    47,    42,    35,    36,     0,     0,     0,
+       6,    95,    97,    96,     0,     0,     0,     2,     6,     6,
+       6,    98,     0,    93,    95,    97,    96,     0,   102,     0,
+       0,     1,     3,     5,     4,    65,     0,    67,     0,     0,
+       0,    93,    94,     0,     0,     0,    66,    68,    62,     0,
+      61,    60,    74,     0,     0,    50,    52,    40,    51,    43,
+       0,     0,     0,     0,     0,    38,    45,    41,    42,    69,
+       0,     0,     0,     0,    74,    65,     0,    77,     0,    86,
+       0,     0,     0,     0,    43,    39,    35,    36,    49,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    71,    65,    64,     0,    74,    67,
-       0,     0,    46,    84,     0,     0,    88,    41,    81,    83,
-       0,    37,     0,     0,    30,    31,    32,    33,    34,    24,
-      23,    20,    22,    19,    21,    25,    26,    27,    28,    29,
-      69,    73,    78,    76,     0,     0,     0,    47,    18,     8,
-       0,    10,     0,    13,    14,    11,    12,    15,    16,     0,
-      87,     0,     0,     0,     0,    39,    50,     0,    77,     0,
-       0,     0,     7,     9,     0,    17,    86,    85,    89,    83,
-      80,     0,    48,     0,     0,    79,     0,    82,    40,     0,
-      46,     0,    72,    49,    59,    60,    58,    57,     0,    54,
-      55,    56
+       0,     0,     0,     0,     0,     0,    70,    64,    63,     0,
+      73,    66,     0,     0,     0,    83,     0,     0,    87,    88,
+      44,    80,    82,    37,     0,    47,    30,    31,    32,    33,
+      34,    24,    23,    20,    22,    19,    21,    25,    26,    27,
+      28,    29,    46,    72,    77,    75,     0,     0,     0,    18,
+       8,     0,    10,     0,    13,    14,    11,    12,    15,    16,
+       0,    86,     0,     0,     0,     0,     0,    76,     0,     0,
+       0,     7,     9,     0,    17,    85,    84,    92,     0,    82,
+      79,    49,     0,     0,    78,     0,     0,    89,    92,    81,
+      48,     0,     0,    71,     0,    90,    58,    59,    57,    56,
+      92,     0,    53,    91,    54,    55
     };
   }
 
@@ -1788,10 +1824,10 @@ public class Whkcc
   {
     return new short[]
     {
-    -129,  -129,   205,  -128,   163,   123,   -49,   256,  -129,   119,
-    -129,  -129,  -129,   -96,   -11,   -32,   289,  -129,   -95,   266,
-     299,   294,  -129,   -92,   258,  -129,   278,   325,  -129,  -129,
-      15,   425
+    -170,  -170,   112,   -86,    40,     5,   -35,   -32,    49,    62,
+    -170,    43,  -170,  -170,  -170,  -101,     6,   -37,   148,  -170,
+    -100,   171,   206,   104,  -170,   -99,    68,  -170,    88,   159,
+    -170,  -169,  -170,  -170,    -4,   235
     };
   }
 
@@ -1801,10 +1837,10 @@ public class Whkcc
   {
     return new short[]
     {
-       0,     6,     7,   103,   140,   141,    53,   142,    54,   143,
-     189,   144,   186,     8,    38,    27,    28,   146,     9,    60,
-      61,   101,   148,    55,   154,    10,   105,    66,    11,    18,
-      12,    67
+       0,     6,     7,   105,   141,   142,    54,    55,    56,   115,
+      57,   144,   192,   145,   188,     8,    40,    28,    29,   147,
+       9,    63,    64,   103,   149,    58,   155,    10,   107,    69,
+     109,   177,    11,    18,    12,    70
     };
   }
 
@@ -1816,50 +1852,58 @@ public class Whkcc
   {
     return new short[]
     {
-      72,    25,    75,    76,    13,    58,   145,   147,    94,    64,
-     149,   135,    88,    89,    90,    91,    92,    39,    36,    37,
-      19,   109,   110,   167,    21,    26,    62,   102,   114,   115,
-     116,   117,   118,   119,   120,   121,   122,   123,   124,   125,
-     126,   127,   128,   129,    41,   145,   147,    95,    96,   149,
-      63,    29,   184,   187,    33,    41,   -96,    19,    34,    56,
-     190,   -98,   112,    57,   157,   113,    69,    70,   132,    71,
-      44,    45,    46,    47,    48,   -97,    41,    30,    49,   108,
-      14,    15,    16,    17,   145,   147,    31,   161,   149,    50,
-      44,    45,    46,    47,    48,    32,    51,    52,    49,    35,
-      14,    15,    16,    17,   169,     1,     2,     3,     4,    50,
-     173,   174,   175,     5,    42,   176,    51,    52,    65,    19,
-      43,    68,    77,    78,    79,    80,    81,    82,    83,    84,
-      85,    86,    87,    88,    89,    90,    91,    92,   182,    84,
-      85,    86,    87,    88,    89,    90,    91,    92,    77,    78,
+      59,    19,    61,   146,   148,   150,    67,    25,    65,   185,
+      14,    15,    16,    17,    13,    73,    21,    76,    77,    75,
+     137,   193,    32,    34,    30,    96,    43,    35,    68,   -99,
+      34,    26,    66,  -101,    60,    41,   104,   112,    43,   110,
+      19,   146,   148,   150,   116,   117,   118,   119,   120,   121,
+     122,   123,   124,   125,   126,   127,   128,   129,   130,   131,
+      43,    27,  -100,   132,    31,   134,   166,    97,    98,    33,
+      71,    72,   143,    34,    71,    37,    36,    34,    44,   156,
+     146,   148,   150,     1,     2,     3,     4,    74,    27,    38,
+      39,     5,    27,    95,    99,   186,   189,    90,    91,    92,
+      93,    94,    19,   160,    34,   194,    14,    15,    16,    17,
+     143,     1,     2,     3,    17,    37,   101,   102,   168,   169,
+      22,    23,    24,   172,   173,    92,    93,    94,   175,    45,
+      46,    47,    48,    49,   104,   108,   106,    50,   111,   133,
+     135,   184,    45,    46,    47,    48,    49,   114,    51,   143,
+      50,    27,   152,   167,   153,    52,    53,   158,   159,   161,
+     164,    51,    45,    46,    47,    48,    49,   163,    52,    53,
+      50,     1,     2,     3,     4,   136,   137,   170,   138,   176,
+     174,    51,   162,   191,    49,   139,   187,    62,    52,    53,
       79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
-      89,    90,    91,    92,   153,     1,     2,     3,    17,   112,
-      70,    73,   113,    77,    78,    79,    80,    81,    82,    83,
-      84,    85,    86,    87,    88,    89,    90,    91,    92,     1,
-       2,     3,     4,   134,   135,    93,   136,    90,    91,    92,
-      97,    33,   137,   138,     1,     2,     3,     4,   134,   135,
-      99,   136,   -46,    22,    23,    24,   100,   137,   138,   102,
-     104,   111,   106,   107,   151,   131,   139,    77,    78,    79,
-      80,    81,    82,    83,    84,    85,    86,    87,    88,    89,
-      90,    91,    92,   180,   130,    56,   133,   152,   156,    77,
-      78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,    92,   181,   159,   160,   162,   165,
-     170,    77,    78,    79,    80,    81,    82,    83,    84,    85,
-      86,    87,    88,    89,    90,    91,    92,     1,     2,     3,
-       4,   134,   135,   164,   136,   168,   171,   178,   179,   183,
-     137,   138,   188,   185,   163,   155,    74,   191,   102,    77,
-      78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,    92,   172,    59,    98,    40,    77,
-      78,    79,    80,    81,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,    92,    77,    78,    79,    80,    81,
-      82,    83,    84,    85,    86,    87,    88,    89,    90,    91,
-      92,    78,    79,    80,    81,    82,    83,    84,    85,    86,
-      87,    88,    89,    90,    91,    92,    79,    80,    81,    82,
+      89,    90,    91,    92,    93,    94,   183,    86,    87,    88,
+      89,    90,    91,    92,    93,    94,    79,    80,    81,    82,
       83,    84,    85,    86,    87,    88,    89,    90,    91,    92,
-      80,    81,    82,    83,    84,    85,    86,    87,    88,    89,
-      90,    91,    92,    81,    82,    83,    84,    85,    86,    87,
-      88,    89,    90,    91,    92,    82,    83,    84,    85,    86,
-      87,    88,    89,    90,    91,    92,   158,   177,   166,   150,
-      20
+      93,    94,   154,   180,   195,   100,    42,   179,   157,   165,
+      20,    79,    80,    81,    82,    83,    84,    85,    86,    87,
+      88,    89,    90,    91,    92,    93,    94,     1,     2,     3,
+       4,   136,   137,     0,   138,   151,     0,     0,     0,     0,
+      49,   139,     0,     0,   113,     0,     0,     0,     0,   140,
+      79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
+      89,    90,    91,    92,    93,    94,   181,     0,     0,     0,
+       0,     0,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,   182,     0,
+       0,     0,     0,     0,    79,    80,    81,    82,    83,    84,
+      85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
+       1,     2,     3,     4,   136,   137,     0,   138,     0,     0,
+       0,     0,     0,    49,   139,     0,     0,     0,    78,     0,
+       0,   104,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,   171,     0,
+       0,     0,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,   178,     0,
+       0,     0,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,   190,     0,
+       0,     0,    79,    80,    81,    82,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,    79,    80,
+      81,    82,    83,    84,    85,    86,    87,    88,    89,    90,
+      91,    92,    93,    94,    80,    81,    82,    83,    84,    85,
+      86,    87,    88,    89,    90,    91,    92,    93,    94,    81,
+      82,    83,    84,    85,    86,    87,    88,    89,    90,    91,
+      92,    93,    94,    82,    83,    84,    85,    86,    87,    88,
+      89,    90,    91,    92,    93,    94,    83,    84,    85,    86,
+      87,    88,    89,    90,    91,    92,    93,    94,    84,    85,
+      86,    87,    88,    89,    90,    91,    92,    93,    94
     };
   }
 
@@ -1868,50 +1912,58 @@ private static final short[] yycheck_ = yycheck_init();
   {
     return new short[]
     {
-      49,    16,    51,    52,    16,    37,   102,   102,    57,    41,
-     102,     8,    38,    39,    40,    41,    42,    28,    17,    18,
-       5,    70,    71,   151,     0,    40,    16,    24,    77,    78,
-      79,    80,    81,    82,    83,    84,    85,    86,    87,    88,
-      89,    90,    91,    92,    29,   141,   141,    58,    59,   141,
-      40,    24,   180,   181,    22,    40,    16,    42,    26,    22,
-     188,    16,    19,    26,   113,    22,    19,    20,   100,    22,
-      12,    13,    14,    15,    16,    16,    61,    16,    20,    21,
-       3,     4,     5,     6,   180,   180,    40,   136,   180,    31,
-      12,    13,    14,    15,    16,    16,    38,    39,    20,    16,
-       3,     4,     5,     6,   153,     3,     4,     5,     6,    31,
-     159,   160,    17,    11,    20,   164,    38,    39,    21,   104,
-      12,    23,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41,    42,    17,    34,
+      35,     5,    39,   104,   104,   104,    43,    16,    16,   178,
+       3,     4,     5,     6,    16,    50,     0,    52,    53,    51,
+       8,   190,    40,    22,    24,    60,    30,    26,    21,    16,
+      22,    40,    40,    16,    26,    29,    24,    72,    42,    71,
+      44,   142,   142,   142,    79,    80,    81,    82,    83,    84,
+      85,    86,    87,    88,    89,    90,    91,    92,    93,    94,
+      64,    12,    16,    95,    16,   102,   152,    61,    62,    16,
+      19,    20,   104,    22,    19,    26,    16,    22,    20,   114,
+     181,   181,   181,     3,     4,     5,     6,    16,    39,    17,
+      18,    11,    43,    19,    25,   181,   182,    38,    39,    40,
+      41,    42,   106,   138,    22,   191,     3,     4,     5,     6,
+     142,     3,     4,     5,     6,    66,    16,    18,   153,   154,
+       8,     9,    10,   158,   159,    40,    41,    42,   163,    12,
+      13,    14,    15,    16,    24,    16,    18,    20,    21,    17,
+      17,   176,    12,    13,    14,    15,    16,    22,    31,   181,
+      20,   102,    21,    23,    22,    38,    39,    20,    20,    25,
+      17,    31,    12,    13,    14,    15,    16,    26,    38,    39,
+      20,     3,     4,     5,     6,     7,     8,    21,    10,    22,
+      17,    31,   142,     9,    16,    17,   181,    39,    38,    39,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      37,    38,    39,    40,    41,    42,    17,    34,    35,    36,
+      37,    38,    39,    40,    41,    42,    27,    28,    29,    30,
+      31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
+      41,    42,    18,   171,   191,    64,    30,   169,   134,   151,
+       5,    27,    28,    29,    30,    31,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,     3,     4,     5,
+       6,     7,     8,    -1,    10,   106,    -1,    -1,    -1,    -1,
+      16,    17,    -1,    -1,    21,    -1,    -1,    -1,    -1,    25,
+      27,    28,    29,    30,    31,    32,    33,    34,    35,    36,
+      37,    38,    39,    40,    41,    42,    21,    -1,    -1,    -1,
+      -1,    -1,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    21,    -1,
+      -1,    -1,    -1,    -1,    27,    28,    29,    30,    31,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
+       3,     4,     5,     6,     7,     8,    -1,    10,    -1,    -1,
+      -1,    -1,    -1,    16,    17,    -1,    -1,    -1,    23,    -1,
+      -1,    24,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    23,    -1,
+      -1,    -1,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    23,    -1,
+      -1,    -1,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    23,    -1,
+      -1,    -1,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    27,    28,
       29,    30,    31,    32,    33,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    18,     3,     4,     5,     6,    19,
-      20,    16,    22,    27,    28,    29,    30,    31,    32,    33,
-      34,    35,    36,    37,    38,    39,    40,    41,    42,     3,
-       4,     5,     6,     7,     8,    12,    10,    40,    41,    42,
-      25,    22,    16,    17,     3,     4,     5,     6,     7,     8,
-      16,    10,    26,     8,     9,    10,    18,    16,    17,    24,
-      18,    21,    16,    16,    21,    17,    25,    27,    28,    29,
+      39,    40,    41,    42,    28,    29,    30,    31,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42,    29,
       30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    21,    23,    22,    17,    22,    16,    27,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    21,    20,    20,    25,    17,
-      21,    27,    28,    29,    30,    31,    32,    33,    34,    35,
-      36,    37,    38,    39,    40,    41,    42,     3,     4,     5,
-       6,     7,     8,    26,    10,    23,    19,    16,    19,    16,
-      16,    17,     9,   180,   141,    23,    50,   188,    24,    27,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    23,    37,    61,    29,    27,
-      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    27,    28,    29,    30,    31,
-      32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
-      42,    28,    29,    30,    31,    32,    33,    34,    35,    36,
-      37,    38,    39,    40,    41,    42,    29,    30,    31,    32,
-      33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    31,    32,    33,    34,    35,    36,    37,
-      38,    39,    40,    41,    42,    32,    33,    34,    35,    36,
-      37,    38,    39,    40,    41,    42,   132,   169,   150,   104,
-       5
+      40,    41,    42,    30,    31,    32,    33,    34,    35,    36,
+      37,    38,    39,    40,    41,    42,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42
     };
   }
 
@@ -1922,26 +1974,26 @@ private static final short[] yycheck_ = yycheck_init();
   {
     return new byte[]
     {
-       0,     3,     4,     5,     6,    11,    47,    48,    59,    64,
-      71,    74,    76,    16,     3,     4,     5,     6,    75,    76,
-      77,     0,    48,    48,    48,    16,    40,    61,    62,    24,
-      16,    40,    16,    22,    26,    16,    17,    18,    60,    60,
-      66,    76,    20,    12,    12,    13,    14,    15,    16,    20,
-      31,    38,    39,    52,    54,    69,    22,    26,    61,    62,
-      65,    66,    16,    40,    61,    21,    73,    77,    23,    19,
-      20,    22,    52,    16,    53,    52,    52,    27,    28,    29,
-      30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    12,    52,    60,    60,    25,    65,    16,
-      18,    67,    24,    49,    18,    72,    16,    16,    21,    52,
-      52,    21,    19,    22,    52,    52,    52,    52,    52,    52,
+       0,     3,     4,     5,     6,    11,    47,    48,    61,    66,
+      73,    78,    80,    16,     3,     4,     5,     6,    79,    80,
+      81,     0,    48,    48,    48,    16,    40,    54,    63,    64,
+      24,    16,    40,    16,    22,    26,    16,    54,    17,    18,
+      62,    62,    68,    80,    20,    12,    13,    14,    15,    16,
+      20,    31,    38,    39,    52,    53,    54,    56,    71,    52,
+      26,    63,    64,    67,    68,    16,    40,    63,    21,    75,
+      81,    19,    20,    52,    16,    53,    52,    52,    23,    27,
+      28,    29,    30,    31,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    42,    19,    52,    62,    62,    25,
+      67,    16,    18,    69,    24,    49,    18,    74,    16,    76,
+      53,    21,    52,    21,    22,    55,    52,    52,    52,    52,
       52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      23,    17,    61,    17,     7,     8,    10,    16,    17,    25,
-      50,    51,    53,    55,    57,    59,    63,    64,    68,    69,
-      73,    21,    22,    18,    70,    23,    16,    52,    67,    20,
-      20,    52,    25,    50,    26,    17,    72,    49,    23,    52,
-      21,    19,    23,    52,    52,    17,    52,    70,    16,    19,
-      21,    21,    17,    16,    49,    51,    58,    49,     9,    56,
-      49,    55
+      52,    52,    53,    17,    63,    17,     7,     8,    10,    17,
+      25,    50,    51,    53,    57,    59,    61,    65,    66,    70,
+      71,    75,    21,    22,    18,    72,    52,    69,    20,    20,
+      52,    25,    50,    26,    17,    74,    49,    23,    52,    52,
+      21,    23,    52,    52,    17,    52,    22,    77,    23,    72,
+      55,    21,    21,    17,    52,    77,    49,    51,    60,    49,
+      23,     9,    58,    77,    49,    57
     };
   }
 
@@ -1955,12 +2007,13 @@ private static final short[] yycheck_ = yycheck_init();
       50,    51,    51,    51,    51,    51,    51,    51,    51,    52,
       52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
       52,    52,    52,    52,    52,    52,    52,    52,    52,    52,
-      52,    52,    52,    52,    52,    52,    53,    53,    53,    53,
-      53,    54,    54,    54,    55,    56,    56,    56,    57,    58,
-      58,    59,    59,    60,    60,    60,    61,    61,    61,    61,
-      62,    62,    63,    64,    65,    65,    66,    67,    67,    68,
-      69,    69,    70,    70,    71,    71,    72,    72,    73,    73,
-      74,    75,    76,    76,    76,    76,    77,    77,    77,    77
+      52,    52,    52,    53,    53,    53,    53,    54,    55,    55,
+      56,    56,    56,    57,    58,    58,    58,    59,    60,    60,
+      61,    61,    62,    62,    62,    63,    63,    63,    63,    64,
+      64,    65,    66,    67,    67,    68,    69,    69,    70,    71,
+      71,    72,    72,    73,    73,    74,    74,    75,    75,    76,
+      76,    77,    77,    78,    79,    80,    80,    80,    80,    81,
+      81,    81,    81
     };
   }
 
@@ -1973,13 +2026,14 @@ private static final short[] yycheck_ = yycheck_init();
        0,     2,     1,     2,     2,     2,     0,     3,     2,     2,
        1,     1,     1,     1,     1,     1,     1,     2,     1,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,     3,     3,     2,     2,     3,     1,     4,
-       6,     3,     2,     1,     1,     1,     0,     1,     4,     6,
-       3,     1,     1,     1,     6,     2,     2,     0,     5,     1,
-       1,     3,     3,     1,     3,     3,     1,     2,     4,     5,
-       3,     4,     4,     7,     2,     0,     4,     3,     0,     3,
-       5,     3,     3,     0,     6,     8,     3,     0,     2,     4,
-       2,     2,     1,     1,     1,     1,     1,     1,     1,     1
+       3,     3,     3,     3,     3,     2,     2,     3,     1,     2,
+       1,     1,     1,     1,     3,     1,     3,     5,     4,     0,
+       1,     1,     1,     6,     2,     2,     0,     5,     1,     1,
+       3,     3,     1,     3,     3,     1,     2,     1,     2,     3,
+       4,     4,     7,     2,     0,     4,     3,     0,     3,     5,
+       3,     3,     0,     6,     8,     3,     0,     2,     2,     4,
+       5,     4,     0,     2,     2,     1,     1,     1,     1,     1,
+       1,     1,     1
     };
   }
 
@@ -2039,13 +2093,13 @@ private static final short[] yycheck_ = yycheck_init();
   }
 
 
-  private static final int YYLAST_ = 430;
+  private static final int YYLAST_ = 518;
   private static final int YYEMPTY_ = -2;
   private static final int YYFINAL_ = 21;
   private static final int YYNTOKENS_ = 46;
 
 /* Unqualified %code blocks.  */
-/* "Whkcc.y":15  */
+/* "Whkcc.y":14  */
 
     /**
      * Parse input from the scanner that was specified at object construction
@@ -2276,8 +2330,8 @@ private static final short[] yycheck_ = yycheck_init();
         wl.printASTree();
     }
 
-/* "Whkcc.java":2280  */
+/* "Whkcc.java":2334  */
 
 }
-/* "Whkcc.y":465  */
+/* "Whkcc.y":480  */
 

@@ -14,7 +14,7 @@ public class WhkccLexer implements Whkcc.Lexer {
     private final ASTree tree;
     private Object yylval;
     private Position yylpos;
-    private static final File inputFile = new File("src/main/java/wang/armeria/whkcc/test_simple.lex");
+    private static final File inputFile = new File("src/main/java/wang/armeria/whkcc/test_simple.lx");
     private static WhkccLexer singleInstance = null;
 
     private WhkccLexer(InputStream is) {
@@ -72,7 +72,6 @@ public class WhkccLexer implements Whkcc.Lexer {
             return Utils.tokenType2LexerId(token.getTokenType());
         }
     }
-
 
 
     public void addTerminalNode(Whkcc.SymbolKind symbolKind, Position position, Object value) {

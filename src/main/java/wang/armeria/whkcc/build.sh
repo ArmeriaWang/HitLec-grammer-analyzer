@@ -16,11 +16,11 @@ touch Whkcc.y
 cat header.y >> Whkcc.y
 cat body.y >> Whkcc.y
 if [ "$debug" -eq 0 ]; then
-    bison Whkcc.y -g -x --warnings=none
+    bison Whkcc.y -g -x --report=all --warnings=none
 fi
 if [ "$debug" -eq 1 ]; then
-    bison Whkcc.y -g -x
+    bison Whkcc.y -g -x --report=all
 fi
 if [ "$debug" -eq 2 ]; then
-    bison Whkcc.y -g -x -Wcounterexamples
+    bison Whkcc.y -g -x --report=all -Wcounterexamples
 fi

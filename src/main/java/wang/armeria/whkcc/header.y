@@ -8,7 +8,6 @@
 %define api.package {wang.armeria.whkcc};
 %code imports {
   import java.io.IOException;
-  import wang.armeria.ast.ASTreeNode;
   import wang.armeria.token.Position;
 }
 

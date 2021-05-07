@@ -51,5 +51,9 @@ function int main() {
 
     struct Node node;
     printNode(&node, 0777);
+
+    struct Edge *hd_arr[3][3 * 3][2 + 0x3fff % 077];
+    hd_arr[0][1][2] = &edge[3];
+
     return 0;
 }

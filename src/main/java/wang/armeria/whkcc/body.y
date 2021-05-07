@@ -79,21 +79,27 @@ EXP_R
 	| PLUS EXP_R %prec POSITIVE {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 2);}
 	| MINUS EXP_R %prec NEGATIVE {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 2);}
 	| ROUND_LEFT EXP_R ROUND_RIGHT  {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);}
-	| ID {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);}
-	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 4);}
-	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT DOT ID {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 6);}
-	| ID DOT ID {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 3);}
+	| EXP_L {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);}
 	| APSAND EXP_L %prec GET_ADDR {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 2);}
 	| CONST_STRING {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);}
 	| NUMBER {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);}
 	| FUNC_CALL {wl.addNonTerminalNode(SymbolKind.S_EXP_R, 1);}
 	;
 
-EXP_L:
-	| ID {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 1);}
-	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 4);}
-	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT DOT ID {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 6);}
-	| ID DOT ID {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 3);}
+EXP_L
+	: ID {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 1);}
+	| ID DOT EXP_L {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 3);}
+	| HD_ARRAY {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 1);}
+	| HD_ARRAY DOT EXP_L {wl.addNonTerminalNode(SymbolKind.S_EXP_L, 3);}
+	;
+
+HD_ARRAY
+	: ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM {wl.addNonTerminalNode(SymbolKind.S_HD_ARRAY, 5);}
+	;
+
+MORE_ARRAY_DIM
+	: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM {wl.addNonTerminalNode(SymbolKind.S_MORE_ARRAY_DIM, 4);}
+	| {wl.addNonTerminalNode(SymbolKind.S_MORE_ARRAY_DIM, 0);}
 	;
 
 NUMBER
@@ -135,8 +141,8 @@ DECLARE_MORE
 DECLARE_NON_INITIALIZE
 	: ID {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 1);}
 	| STAR ID {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 2);}
-	| ID SQUARE_LEFT CONST_INTEGER SQUARE_RIGHT {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 4);}
-	| STAR ID SQUARE_LEFT CONST_INTEGER SQUARE_RIGHT {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 5);}
+	| HD_ARRAY {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 1);}
+	| STAR HD_ARRAY {wl.addNonTerminalNode(SymbolKind.S_DECLARE_NON_INITIALIZE, 2);}
 	;
 
 DECLARE_INITIALIZE
@@ -192,7 +198,17 @@ RECV_FUNC_ARGS
 
 SINGLE_RECV_FUNC_ARG
 	: FUNC_DEF_TYPE ID {wl.addNonTerminalNode(SymbolKind.S_SINGLE_RECV_FUNC_ARG, 2);}
-	| FUNC_DEF_TYPE ID SQUARE_LEFT SQUARE_RIGHT {wl.addNonTerminalNode(SymbolKind.S_SINGLE_RECV_FUNC_ARG, 4);}
+	| FUNC_DEF_TYPE RECV_HD_ARRAY {wl.addNonTerminalNode(SymbolKind.S_SINGLE_RECV_FUNC_ARG, 2);}
+	;
+
+RECV_HD_ARRAY
+	: ID SQUARE_LEFT SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(SymbolKind.S_RECV_HD_ARRAY, 4);}
+	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(SymbolKind.S_RECV_HD_ARRAY, 5);}
+	;
+
+MORE_RECV_HD_ARRAY_DIM
+	: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(SymbolKind.S_MORE_RECV_HD_ARRAY_DIM, 4);}
+	| {wl.addNonTerminalNode(SymbolKind.S_MORE_RECV_HD_ARRAY_DIM, 0);}
 	;
 
 DT_STRUCT
