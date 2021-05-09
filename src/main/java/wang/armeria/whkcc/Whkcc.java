@@ -1,151 +1,104 @@
-/* A Bison parser, made by GNU Bison 3.7.6.  */
-
-/* Skeleton implementation for Bison LALR(1) parsers in Java
-
-   Copyright (C) 2007-2015, 2018-2021 Free Software Foundation, Inc.
-
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
-
-/* As a special exception, you may create a larger work that contains
-   part or all of the Bison parser skeleton and distribute that work
-   under terms of your choice, so long as that work isn't itself a
-   parser generator using the skeleton or a modified version thereof
-   as a parser skeleton.  Alternatively, if you modify or redistribute
-   the parser skeleton itself, you may (at your option) remove this
-   special exception, which will cause the skeleton and the resulting
-   Bison output files to be licensed under the GNU General Public
-   License without this special exception.
-
-   This special exception was added by the Free Software Foundation in
-   version 2.2 of Bison.  */
-
-/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-   especially those whose name start with YY_ or yy_.  They are
-   private implementation details that can be changed or removed.  */
-
 package wang.armeria.whkcc;
 
-
 import java.text.MessageFormat;
-/* "%code imports" blocks.  */
-/* "Whkcc.y":9  */
-
 import java.io.IOException;
 
 import wang.armeria.token.Position;
 
-/* "Whkcc.java":49  */
 
 /**
  * 基于LALR(1)文法的语法分析系统，分析对象为类C语言文法
  */
 public class Whkcc {
 
-
-    /**
-     * True if verbose error messages are enabled.
-     */
     private boolean yyErrorVerbose = true;
-
 
     /**
      * 符号类型
      */
     public enum SymbolKind {
-        S_YYEOF(0),                    /* "end of file"  */
-        S_YYerror(1),                  /* error  */
-        S_YYUNDEF(2),                  /* "invalid token"  */
-        S_DT_INTEGER(3),               /* DT_INTEGER  */
-        S_DT_BOOLEAN(4),               /* DT_BOOLEAN  */
-        S_DT_FLOAT(5),                 /* DT_FLOAT  */
-        S_STRUCT(6),                   /* STRUCT  */
-        S_WHILE(7),                    /* WHILE  */
-        S_IF(8),                       /* IF  */
-        S_ELSE(9),                     /* ELSE  */
-        S_RETURN(10),                  /* RETURN  */
-        S_FUNCTION(11),                /* FUNCTION  */
-        S_CONST_INTEGER(12),           /* CONST_INTEGER  */
-        S_CONST_FLOAT(13),             /* CONST_FLOAT  */
-        S_CONST_STRING(14),            /* CONST_STRING  */
-        S_CONST_BOOLEAN(15),           /* CONST_BOOLEAN  */
-        S_ID(16),                      /* ID  */
-        S_SEMICOLON(17),               /* SEMICOLON  */
-        S_COMMA(18),                   /* COMMA  */
-        S_DOT(19),                     /* DOT  */
-        S_ROUND_LEFT(20),              /* ROUND_LEFT  */
-        S_ROUND_RIGHT(21),             /* ROUND_RIGHT  */
-        S_SQUARE_LEFT(22),             /* SQUARE_LEFT  */
-        S_SQUARE_RIGHT(23),            /* SQUARE_RIGHT  */
-        S_BEGIN(24),                   /* BEGIN  */
-        S_END(25),                     /* END  */
-        S_ASSIGN(26),                  /* ASSIGN  */
-        S_LOR(27),                     /* LOR  */
-        S_LAND(28),                    /* LAND  */
-        S_BOR(29),                     /* BOR  */
-        S_BXOR(30),                    /* BXOR  */
-        S_APSAND(31),                  /* APSAND  */
-        S_EQ(32),                      /* EQ  */
-        S_NE(33),                      /* NE  */
-        S_LE(34),                      /* LE  */
-        S_GE(35),                      /* GE  */
-        S_LT(36),                      /* LT  */
-        S_GT(37),                      /* GT  */
-        S_PLUS(38),                    /* PLUS  */
-        S_MINUS(39),                   /* MINUS  */
-        S_STAR(40),                    /* STAR  */
-        S_DIVIDE(41),                  /* DIVIDE  */
-        S_MOD(42),                     /* MOD  */
-        S_GET_ADDR(43),                /* GET_ADDR  */
-        S_POSITIVE(44),                /* POSITIVE  */
-        S_NEGATIVE(45),                /* NEGATIVE  */
-        S_YYACCEPT(46),                /* $accept  */
-        S_PROGRAM(47),                 /* PROGRAM  */
-        S_TOP_STATEMENTS(48),          /* TOP_STATEMENTS  */
-        S_STATEMENTS_BLOCK(49),        /* STATEMENTS_BLOCK  */
-        S_STATEMENTS(50),              /* STATEMENTS  */
-        S_STATEMENT(51),               /* STATEMENT  */
-        S_EXP_R(52),                   /* EXP_R  */
-        S_EXP_L(53),                   /* EXP_L  */
-        S_HD_ARRAY(54),                /* HD_ARRAY  */
-        S_MORE_ARRAY_DIM(55),          /* MORE_ARRAY_DIM  */
-        S_NUMBER(56),                  /* NUMBER  */
-        S_STATEMENT_IF(57),            /* STATEMENT_IF  */
-        S_STATEMENT_ELSE(58),          /* STATEMENT_ELSE  */
-        S_STATEMENT_WHILE(59),         /* STATEMENT_WHILE  */
-        S_WHILE_BODY(60),              /* WHILE_BODY  */
-        S_STATEMENT_VAR_DEF(61),       /* STATEMENT_VAR_DEF  */
-        S_DECLARE_MORE(62),            /* DECLARE_MORE  */
-        S_DECLARE_NON_INITIALIZE(63),  /* DECLARE_NON_INITIALIZE  */
-        S_DECLARE_INITIALIZE(64),      /* DECLARE_INITIALIZE  */
-        S_STATEMENT_ASSIGN(65),        /* STATEMENT_ASSIGN  */
-        S_STATEMENT_STRUCT_DEF(66),    /* STATEMENT_STRUCT_DEF  */
-        S_MORE_STRUCT_MEMBER_DEF(67),  /* MORE_STRUCT_MEMBER_DEF  */
-        S_STRUCT_MEMBER_DEF(68),       /* STRUCT_MEMBER_DEF  */
-        S_DECLARE_MORE_NON_INITIALIZE(69), /* DECLARE_MORE_NON_INITIALIZE  */
-        S_STATEMENT_RETURN(70),        /* STATEMENT_RETURN  */
-        S_FUNC_CALL(71),               /* FUNC_CALL  */
-        S_SEND_FUNC_ARGS(72),          /* SEND_FUNC_ARGS  */
-        S_STATEMENT_FUNC_DEF(73),      /* STATEMENT_FUNC_DEF  */
-        S_RECV_FUNC_ARGS(74),          /* RECV_FUNC_ARGS  */
-        S_SINGLE_RECV_FUNC_ARG(75),    /* SINGLE_RECV_FUNC_ARG  */
-        S_RECV_HD_ARRAY(76),           /* RECV_HD_ARRAY  */
-        S_MORE_RECV_HD_ARRAY_DIM(77),  /* MORE_RECV_HD_ARRAY_DIM  */
-        S_DT_STRUCT(78),               /* DT_STRUCT  */
-        S_DT_POINTER(79),              /* DT_POINTER  */
-        S_VAR_DEF_TYPE(80),            /* VAR_DEF_TYPE  */
-        S_FUNC_DEF_TYPE(81);           /* FUNC_DEF_TYPE  */
-
+        S_YYEOF(0),
+        S_YYerror(1),
+        S_YYUNDEF(2),
+        S_DT_INTEGER(3),
+        S_DT_BOOLEAN(4),
+        S_DT_FLOAT(5),
+        S_STRUCT(6),
+        S_WHILE(7),
+        S_IF(8),
+        S_ELSE(9),
+        S_RETURN(10),
+        S_FUNCTION(11),
+        S_CONST_INTEGER(12),
+        S_CONST_FLOAT(13),
+        S_CONST_STRING(14),
+        S_CONST_BOOLEAN(15),
+        S_ID(16),
+        S_SEMICOLON(17),
+        S_COMMA(18),
+        S_DOT(19),
+        S_ROUND_LEFT(20),
+        S_ROUND_RIGHT(21),
+        S_SQUARE_LEFT(22),
+        S_SQUARE_RIGHT(23),
+        S_BEGIN(24),
+        S_END(25),
+        S_ASSIGN(26),
+        S_LOR(27),
+        S_LAND(28),
+        S_BOR(29),
+        S_BXOR(30),
+        S_APSAND(31),
+        S_EQ(32),
+        S_NE(33),
+        S_LE(34),
+        S_GE(35),
+        S_LT(36),
+        S_GT(37),
+        S_PLUS(38),
+        S_MINUS(39),
+        S_STAR(40),
+        S_DIVIDE(41),
+        S_MOD(42),
+        S_GET_ADDR(43),
+        S_POSITIVE(44),
+        S_NEGATIVE(45),
+        S_YYACCEPT(46),
+        S_PROGRAM(47),
+        S_TOP_STATEMENTS(48),
+        S_STATEMENTS_BLOCK(49),
+        S_STATEMENTS(50),
+        S_STATEMENT(51),
+        S_EXP_R(52),
+        S_EXP_L(53),
+        S_HD_ARRAY(54),
+        S_MORE_ARRAY_DIM(55),
+        S_NUMBER(56),
+        S_STATEMENT_IF(57),
+        S_STATEMENT_ELSE(58),
+        S_STATEMENT_WHILE(59),
+        S_WHILE_BODY(60),
+        S_STATEMENT_VAR_DEF(61),
+        S_DECLARE_MORE(62),
+        S_DECLARE_NON_INITIALIZE(63),
+        S_DECLARE_INITIALIZE(64),
+        S_STATEMENT_ASSIGN(65),
+        S_STATEMENT_STRUCT_DEF(66),
+        S_MORE_STRUCT_MEMBER_DEF(67),
+        S_STRUCT_MEMBER_DEF(68),
+        S_DECLARE_MORE_NON_INITIALIZE(69),
+        S_STATEMENT_RETURN(70),
+        S_FUNC_CALL(71),
+        S_SEND_FUNC_ARGS(72),
+        S_STATEMENT_FUNC_DEF(73),
+        S_RECV_FUNC_ARGS(74),
+        S_SINGLE_RECV_FUNC_ARG(75),
+        S_RECV_HD_ARRAY(76),
+        S_MORE_RECV_HD_ARRAY_DIM(77),
+        S_DT_STRUCT(78),
+        S_DT_POINTER(79),
+        S_VAR_DEF_TYPE(80),
+        S_FUNC_DEF_TYPE(81);
 
         private final int yycode_;
 
@@ -244,17 +197,13 @@ public class Whkcc {
 
         /**
          * 获取本符号的编号
+         *
          * @return 本符号的编号
          */
         public final int getCode() {
             return this.yycode_;
         }
 
-        /* Return YYSTR after stripping away unnecessary quotes and
-       backslashes, so that it's suitable for yyerror.  The heuristic is
-       that double-quoting is unnecessary unless the string contains an
-       apostrophe, a comma, or backslash (other than backslash-backslash).
-       YYSTR is taken from yytname.  */
         private static String yytnamerr_(String yystr) {
             if (yystr.charAt(0) == '"') {
                 StringBuffer yyr = new StringBuffer();
@@ -268,7 +217,7 @@ public class Whkcc {
                         case '\\':
                             if (yystr.charAt(++i) != '\\')
                                 break strip_quotes;
-                            /* Fall through.  */
+
                         default:
                             yyr.append(yystr.charAt(i));
                             break;
@@ -280,8 +229,6 @@ public class Whkcc {
             return yystr;
         }
 
-        /* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
-       First, the terminals, then, starting at \a YYNTOKENS_, nonterminals.  */
         private static final String[] yytname_ = yytname_init();
 
         private static final String[] yytname_init() {
@@ -314,204 +261,57 @@ public class Whkcc {
 
     }
 
-    ;
-
-
     /**
      * 面向用户的语法分析器类
      */
     public interface Lexer {
-        /* Token kinds.  */
-        /**
-         * Token "end of file", to be returned by the scanner.
-         */
-        static final int YYEOF = 0;
-        /**
-         * Token error, to be returned by the scanner.
-         */
-        static final int YYerror = 256;
-        /**
-         * Token "invalid token", to be returned by the scanner.
-         */
-        static final int YYUNDEF = 257;
-        /**
-         * Token DT_INTEGER, to be returned by the scanner.
-         */
-        static final int DT_INTEGER = 258;
-        /**
-         * Token DT_BOOLEAN, to be returned by the scanner.
-         */
-        static final int DT_BOOLEAN = 259;
-        /**
-         * Token DT_FLOAT, to be returned by the scanner.
-         */
-        static final int DT_FLOAT = 260;
-        /**
-         * Token STRUCT, to be returned by the scanner.
-         */
-        static final int STRUCT = 261;
-        /**
-         * Token WHILE, to be returned by the scanner.
-         */
-        static final int WHILE = 262;
-        /**
-         * Token IF, to be returned by the scanner.
-         */
-        static final int IF = 263;
-        /**
-         * Token ELSE, to be returned by the scanner.
-         */
-        static final int ELSE = 264;
-        /**
-         * Token RETURN, to be returned by the scanner.
-         */
-        static final int RETURN = 265;
-        /**
-         * Token FUNCTION, to be returned by the scanner.
-         */
-        static final int FUNCTION = 266;
-        /**
-         * Token CONST_INTEGER, to be returned by the scanner.
-         */
-        static final int CONST_INTEGER = 267;
-        /**
-         * Token CONST_FLOAT, to be returned by the scanner.
-         */
-        static final int CONST_FLOAT = 268;
-        /**
-         * Token CONST_STRING, to be returned by the scanner.
-         */
-        static final int CONST_STRING = 269;
-        /**
-         * Token CONST_BOOLEAN, to be returned by the scanner.
-         */
-        static final int CONST_BOOLEAN = 270;
-        /**
-         * Token ID, to be returned by the scanner.
-         */
-        static final int ID = 271;
-        /**
-         * Token SEMICOLON, to be returned by the scanner.
-         */
-        static final int SEMICOLON = 272;
-        /**
-         * Token COMMA, to be returned by the scanner.
-         */
-        static final int COMMA = 273;
-        /**
-         * Token DOT, to be returned by the scanner.
-         */
-        static final int DOT = 274;
-        /**
-         * Token ROUND_LEFT, to be returned by the scanner.
-         */
-        static final int ROUND_LEFT = 275;
-        /**
-         * Token ROUND_RIGHT, to be returned by the scanner.
-         */
-        static final int ROUND_RIGHT = 276;
-        /**
-         * Token SQUARE_LEFT, to be returned by the scanner.
-         */
-        static final int SQUARE_LEFT = 277;
-        /**
-         * Token SQUARE_RIGHT, to be returned by the scanner.
-         */
-        static final int SQUARE_RIGHT = 278;
-        /**
-         * Token BEGIN, to be returned by the scanner.
-         */
-        static final int BEGIN = 279;
-        /**
-         * Token END, to be returned by the scanner.
-         */
-        static final int END = 280;
-        /**
-         * Token ASSIGN, to be returned by the scanner.
-         */
-        static final int ASSIGN = 281;
-        /**
-         * Token LOR, to be returned by the scanner.
-         */
-        static final int LOR = 282;
-        /**
-         * Token LAND, to be returned by the scanner.
-         */
-        static final int LAND = 283;
-        /**
-         * Token BOR, to be returned by the scanner.
-         */
-        static final int BOR = 284;
-        /**
-         * Token BXOR, to be returned by the scanner.
-         */
-        static final int BXOR = 285;
-        /**
-         * Token APSAND, to be returned by the scanner.
-         */
-        static final int APSAND = 286;
-        /**
-         * Token EQ, to be returned by the scanner.
-         */
-        static final int EQ = 287;
-        /**
-         * Token NE, to be returned by the scanner.
-         */
-        static final int NE = 288;
-        /**
-         * Token LE, to be returned by the scanner.
-         */
-        static final int LE = 289;
-        /**
-         * Token GE, to be returned by the scanner.
-         */
-        static final int GE = 290;
-        /**
-         * Token LT, to be returned by the scanner.
-         */
-        static final int LT = 291;
-        /**
-         * Token GT, to be returned by the scanner.
-         */
-        static final int GT = 292;
-        /**
-         * Token PLUS, to be returned by the scanner.
-         */
-        static final int PLUS = 293;
-        /**
-         * Token MINUS, to be returned by the scanner.
-         */
-        static final int MINUS = 294;
-        /**
-         * Token STAR, to be returned by the scanner.
-         */
-        static final int STAR = 295;
-        /**
-         * Token DIVIDE, to be returned by the scanner.
-         */
-        static final int DIVIDE = 296;
-        /**
-         * Token MOD, to be returned by the scanner.
-         */
-        static final int MOD = 297;
-        /**
-         * Token GET_ADDR, to be returned by the scanner.
-         */
-        static final int GET_ADDR = 298;
-        /**
-         * Token POSITIVE, to be returned by the scanner.
-         */
-        static final int POSITIVE = 299;
-        /**
-         * Token NEGATIVE, to be returned by the scanner.
-         */
-        static final int NEGATIVE = 300;
 
-        /**
-         * Deprecated, use YYEOF instead.
-         */
-        public static final int EOF = YYEOF;
-
+       int YYEOF = 0;
+       int YYerror = 256;
+       int YYUNDEF = 257;
+       int DT_INTEGER = 258;
+       int DT_BOOLEAN = 259;
+       int DT_FLOAT = 260;
+       int STRUCT = 261;
+       int WHILE = 262;
+       int IF = 263;
+       int ELSE = 264;
+       int RETURN = 265;
+       int FUNCTION = 266;
+       int CONST_INTEGER = 267;
+       int CONST_FLOAT = 268;
+       int CONST_STRING = 269;
+       int CONST_BOOLEAN = 270;
+       int ID = 271;
+       int SEMICOLON = 272;
+       int COMMA = 273;
+       int DOT = 274;
+       int ROUND_LEFT = 275;
+       int ROUND_RIGHT = 276;
+       int SQUARE_LEFT = 277;
+       int SQUARE_RIGHT = 278;
+       int BEGIN = 279;
+       int END = 280;
+       int ASSIGN = 281;
+       int LOR = 282;
+       int LAND = 283;
+       int BOR = 284;
+       int BXOR = 285;
+       int APSAND = 286;
+       int EQ = 287;
+       int NE = 288;
+       int LE = 289;
+       int GE = 290;
+       int LT = 291;
+       int GT = 292;
+       int PLUS = 293;
+       int MINUS = 294;
+       int STAR = 295;
+       int DIVIDE = 296;
+       int MOD = 297;
+       int GET_ADDR = 298;
+       int POSITIVE = 299;
+       int NEGATIVE = 300;
 
         /**
          * 获取最后扫描到的token的语义值
@@ -535,15 +335,9 @@ public class Whkcc {
          */
         void yyerror(String msg);
 
-
     }
 
-
-    /**
-     * The object doing lexical analysis for us.
-     */
     private Lexer yylexer;
-
 
     /**
      * 新建语法分析系统实例
@@ -556,10 +350,6 @@ public class Whkcc {
 
     }
 
-
-    private int yynerrs = 0;
-
-
     /**
      * 通过语法分析器打印错误信息
      *
@@ -568,7 +358,6 @@ public class Whkcc {
     public final void yyerror(String msg) {
         yylexer.yyerror(msg);
     }
-
 
     private final class YYStack {
         private int[] stateStack = new int[16];
@@ -600,7 +389,6 @@ public class Whkcc {
         }
 
         public final void pop(int num) {
-            // Avoid memory leaks... garbage collection is a white lie!
             if (0 < num) {
                 java.util.Arrays.fill(valueStack, height - num + 1, height + 1, null);
             }
@@ -615,7 +403,6 @@ public class Whkcc {
             return valueStack[height - i];
         }
 
-        // Print the state stack on the debug stream.
         public void print(java.io.PrintStream out) {
             out.print("Stack now");
 
@@ -637,10 +424,6 @@ public class Whkcc {
      */
     public static final int YYABORT = 1;
 
-    /**
-     * Internal return codes that are not supported for user semantic
-     * actions.
-     */
     private static final int YYERRLAB = 3;
     private static final int YYNEWSTATE = 4;
     private static final int YYDEFAULT = 5;
@@ -648,15 +431,8 @@ public class Whkcc {
     private static final int YYERRTOKEN = 7;
     private static final int YYRETURN = 8;
 
-
     private int yyerrstatus_ = 0;
 
-    /**
-     * Compute post-reduction state.
-     *
-     * @param yystate the current state
-     * @param yysym   the nonterminal to push on the stack
-     */
     private int yyLRGotoState(int yystate, int yysym) {
         int yyr = yypgoto_[yysym - YYNTOKENS_] + yystate;
         if (0 <= yyr && yyr <= YYLAST_ && yycheck_[yyr] == yystate)
@@ -666,930 +442,15 @@ public class Whkcc {
     }
 
     private int yyaction(int yyn, YYStack yystack, int yylen) {
-    /* If YYLEN is nonzero, implement the default value of the action:
-       '$$ = $1'.  Otherwise, use the top of the stack.
 
-       Otherwise, the following line sets YYVAL to garbage.
-       This behavior is undocumented and Bison
-       users should not rely upon it.  */
         Object yyval = (0 < yylen) ? yystack.valueAt(yylen - 1) : yystack.valueAt(0);
 
-        switch (yyn) {
-            case 2: /* PROGRAM: TOP_STATEMENTS  */
-                if (yyn == 2)
-                    /* "Whkcc.y":273  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 3: /* TOP_STATEMENTS: STATEMENT_VAR_DEF TOP_STATEMENTS  */
-                if (yyn == 3)
-                    /* "Whkcc.y":277  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 4: /* TOP_STATEMENTS: STATEMENT_FUNC_DEF TOP_STATEMENTS  */
-                if (yyn == 4)
-                    /* "Whkcc.y":278  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 5: /* TOP_STATEMENTS: STATEMENT_STRUCT_DEF TOP_STATEMENTS  */
-                if (yyn == 5)
-                    /* "Whkcc.y":279  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 6: /* TOP_STATEMENTS: %empty  */
-                if (yyn == 6)
-                    /* "Whkcc.y":280  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 7: /* STATEMENTS_BLOCK: BEGIN STATEMENTS END  */
-                if (yyn == 7)
-                    /* "Whkcc.y":284  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 8: /* STATEMENTS_BLOCK: BEGIN END  */
-                if (yyn == 8)
-                    /* "Whkcc.y":285  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 9: /* STATEMENTS: STATEMENT STATEMENTS  */
-                if (yyn == 9)
-                    /* "Whkcc.y":289  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 10: /* STATEMENTS: STATEMENT  */
-                if (yyn == 10)
-                    /* "Whkcc.y":290  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 11: /* STATEMENT: STATEMENT_VAR_DEF  */
-                if (yyn == 11)
-                    /* "Whkcc.y":294  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 12: /* STATEMENT: STATEMENT_ASSIGN  */
-                if (yyn == 12)
-                    /* "Whkcc.y":295  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 13: /* STATEMENT: STATEMENT_IF  */
-                if (yyn == 13)
-                    /* "Whkcc.y":296  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 14: /* STATEMENT: STATEMENT_WHILE  */
-                if (yyn == 14)
-                    /* "Whkcc.y":297  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 15: /* STATEMENT: STATEMENT_STRUCT_DEF  */
-                if (yyn == 15)
-                    /* "Whkcc.y":298  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 16: /* STATEMENT: STATEMENT_RETURN  */
-                if (yyn == 16)
-                    /* "Whkcc.y":299  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 17: /* STATEMENT: FUNC_CALL SEMICOLON  */
-                if (yyn == 17)
-                    /* "Whkcc.y":300  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 18: /* STATEMENT: SEMICOLON  */
-                if (yyn == 18)
-                    /* "Whkcc.y":301  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 19: /* EXP_R: EXP_R LT EXP_R  */
-                if (yyn == 19)
-                    /* "Whkcc.y":305  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 20: /* EXP_R: EXP_R LE EXP_R  */
-                if (yyn == 20)
-                    /* "Whkcc.y":306  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 21: /* EXP_R: EXP_R GT EXP_R  */
-                if (yyn == 21)
-                    /* "Whkcc.y":307  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 22: /* EXP_R: EXP_R GE EXP_R  */
-                if (yyn == 22)
-                    /* "Whkcc.y":308  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 23: /* EXP_R: EXP_R NE EXP_R  */
-                if (yyn == 23)
-                    /* "Whkcc.y":309  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 24: /* EXP_R: EXP_R EQ EXP_R  */
-                if (yyn == 24)
-                    /* "Whkcc.y":310  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 25: /* EXP_R: EXP_R PLUS EXP_R  */
-                if (yyn == 25)
-                    /* "Whkcc.y":311  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 26: /* EXP_R: EXP_R MINUS EXP_R  */
-                if (yyn == 26)
-                    /* "Whkcc.y":312  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 27: /* EXP_R: EXP_R STAR EXP_R  */
-                if (yyn == 27)
-                    /* "Whkcc.y":313  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 28: /* EXP_R: EXP_R DIVIDE EXP_R  */
-                if (yyn == 28)
-                    /* "Whkcc.y":314  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 29: /* EXP_R: EXP_R MOD EXP_R  */
-                if (yyn == 29)
-                    /* "Whkcc.y":315  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 30: /* EXP_R: EXP_R LOR EXP_R  */
-                if (yyn == 30)
-                    /* "Whkcc.y":316  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 31: /* EXP_R: EXP_R LAND EXP_R  */
-                if (yyn == 31)
-                    /* "Whkcc.y":317  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 32: /* EXP_R: EXP_R BOR EXP_R  */
-                if (yyn == 32)
-                    /* "Whkcc.y":318  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 33: /* EXP_R: EXP_R BXOR EXP_R  */
-                if (yyn == 33)
-                    /* "Whkcc.y":319  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 34: /* EXP_R: EXP_R APSAND EXP_R  */
-                if (yyn == 34)
-                    /* "Whkcc.y":320  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 35: /* EXP_R: PLUS EXP_R  */
-                if (yyn == 35)
-                    /* "Whkcc.y":321  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 36: /* EXP_R: MINUS EXP_R  */
-                if (yyn == 36)
-                    /* "Whkcc.y":322  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 37: /* EXP_R: ROUND_LEFT EXP_R ROUND_RIGHT  */
-                if (yyn == 37)
-                    /* "Whkcc.y":323  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 38: /* EXP_R: EXP_L  */
-                if (yyn == 38)
-                    /* "Whkcc.y":324  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 39: /* EXP_R: APSAND EXP_L  */
-                if (yyn == 39)
-                    /* "Whkcc.y":325  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 40: /* EXP_R: CONST_STRING  */
-                if (yyn == 40)
-                    /* "Whkcc.y":326  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 41: /* EXP_R: NUMBER  */
-                if (yyn == 41)
-                    /* "Whkcc.y":327  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 42: /* EXP_R: FUNC_CALL  */
-                if (yyn == 42)
-                    /* "Whkcc.y":328  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 43: /* EXP_L: ID  */
-                if (yyn == 43)
-                    /* "Whkcc.y":332  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 44: /* EXP_L: ID DOT EXP_L  */
-                if (yyn == 44)
-                    /* "Whkcc.y":333  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 45: /* EXP_L: HD_ARRAY  */
-                if (yyn == 45)
-                    /* "Whkcc.y":334  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 46: /* EXP_L: HD_ARRAY DOT EXP_L  */
-                if (yyn == 46)
-                    /* "Whkcc.y":335  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 47: /* HD_ARRAY: ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM  */
-                if (yyn == 47)
-                    /* "Whkcc.y":339  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 48: /* MORE_ARRAY_DIM: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM  */
-                if (yyn == 48)
-                    /* "Whkcc.y":343  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 49: /* MORE_ARRAY_DIM: %empty  */
-                if (yyn == 49)
-                    /* "Whkcc.y":344  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 50: /* NUMBER: CONST_INTEGER  */
-                if (yyn == 50)
-                    /* "Whkcc.y":348  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 51: /* NUMBER: CONST_BOOLEAN  */
-                if (yyn == 51)
-                    /* "Whkcc.y":349  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 52: /* NUMBER: CONST_FLOAT  */
-                if (yyn == 52)
-                    /* "Whkcc.y":350  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 53: /* STATEMENT_IF: IF ROUND_LEFT EXP_R ROUND_RIGHT STATEMENTS_BLOCK STATEMENT_ELSE  */
-                if (yyn == 53)
-                    /* "Whkcc.y":354  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 54: /* STATEMENT_ELSE: ELSE STATEMENTS_BLOCK  */
-                if (yyn == 54)
-                    /* "Whkcc.y":358  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 55: /* STATEMENT_ELSE: ELSE STATEMENT_IF  */
-                if (yyn == 55)
-                    /* "Whkcc.y":359  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 56: /* STATEMENT_ELSE: %empty  */
-                if (yyn == 56)
-                    /* "Whkcc.y":360  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 57: /* STATEMENT_WHILE: WHILE ROUND_LEFT EXP_R ROUND_RIGHT WHILE_BODY  */
-                if (yyn == 57)
-                    /* "Whkcc.y":364  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 58: /* WHILE_BODY: STATEMENTS_BLOCK  */
-                if (yyn == 58)
-                    /* "Whkcc.y":368  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 59: /* WHILE_BODY: STATEMENT  */
-                if (yyn == 59)
-                    /* "Whkcc.y":369  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 60: /* STATEMENT_VAR_DEF: VAR_DEF_TYPE DECLARE_INITIALIZE DECLARE_MORE  */
-                if (yyn == 60)
-                    /* "Whkcc.y":373  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 61: /* STATEMENT_VAR_DEF: VAR_DEF_TYPE DECLARE_NON_INITIALIZE DECLARE_MORE  */
-                if (yyn == 61)
-                    /* "Whkcc.y":374  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 62: /* DECLARE_MORE: SEMICOLON  */
-                if (yyn == 62)
-                    /* "Whkcc.y":378  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 63: /* DECLARE_MORE: COMMA DECLARE_INITIALIZE DECLARE_MORE  */
-                if (yyn == 63)
-                    /* "Whkcc.y":379  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 64: /* DECLARE_MORE: COMMA DECLARE_NON_INITIALIZE DECLARE_MORE  */
-                if (yyn == 64)
-                    /* "Whkcc.y":380  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 65: /* DECLARE_NON_INITIALIZE: ID  */
-                if (yyn == 65)
-                    /* "Whkcc.y":384  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 66: /* DECLARE_NON_INITIALIZE: STAR ID  */
-                if (yyn == 66)
-                    /* "Whkcc.y":385  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 67: /* DECLARE_NON_INITIALIZE: HD_ARRAY  */
-                if (yyn == 67)
-                    /* "Whkcc.y":386  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 68: /* DECLARE_NON_INITIALIZE: STAR HD_ARRAY  */
-                if (yyn == 68)
-                    /* "Whkcc.y":387  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 69: /* DECLARE_INITIALIZE: ID ASSIGN EXP_R  */
-                if (yyn == 69)
-                    /* "Whkcc.y":391  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 70: /* DECLARE_INITIALIZE: STAR ID ASSIGN EXP_R  */
-                if (yyn == 70)
-                    /* "Whkcc.y":392  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 71: /* STATEMENT_ASSIGN: EXP_L ASSIGN EXP_R SEMICOLON  */
-                if (yyn == 71)
-                    /* "Whkcc.y":396  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 72: /* STATEMENT_STRUCT_DEF: STRUCT ID BEGIN STRUCT_MEMBER_DEF MORE_STRUCT_MEMBER_DEF END SEMICOLON  */
-                if (yyn == 72)
-                    /* "Whkcc.y":400  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 73: /* MORE_STRUCT_MEMBER_DEF: STRUCT_MEMBER_DEF MORE_STRUCT_MEMBER_DEF  */
-                if (yyn == 73)
-                    /* "Whkcc.y":404  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 74: /* MORE_STRUCT_MEMBER_DEF: %empty  */
-                if (yyn == 74)
-                    /* "Whkcc.y":405  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 75: /* STRUCT_MEMBER_DEF: VAR_DEF_TYPE DECLARE_NON_INITIALIZE DECLARE_MORE_NON_INITIALIZE SEMICOLON  */
-                if (yyn == 75)
-                    /* "Whkcc.y":409  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 76: /* DECLARE_MORE_NON_INITIALIZE: COMMA DECLARE_NON_INITIALIZE DECLARE_MORE_NON_INITIALIZE  */
-                if (yyn == 76)
-                    /* "Whkcc.y":413  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 77: /* DECLARE_MORE_NON_INITIALIZE: %empty  */
-                if (yyn == 77)
-                    /* "Whkcc.y":414  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 78: /* STATEMENT_RETURN: RETURN EXP_R SEMICOLON  */
-                if (yyn == 78)
-                    /* "Whkcc.y":418  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 79: /* FUNC_CALL: ID ROUND_LEFT EXP_R SEND_FUNC_ARGS ROUND_RIGHT  */
-                if (yyn == 79)
-                    /* "Whkcc.y":422  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 80: /* FUNC_CALL: ID ROUND_LEFT ROUND_RIGHT  */
-                if (yyn == 80)
-                    /* "Whkcc.y":423  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 81: /* SEND_FUNC_ARGS: COMMA EXP_R SEND_FUNC_ARGS  */
-                if (yyn == 81)
-                    /* "Whkcc.y":427  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 82: /* SEND_FUNC_ARGS: %empty  */
-                if (yyn == 82)
-                    /* "Whkcc.y":428  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 83: /* STATEMENT_FUNC_DEF: FUNCTION FUNC_DEF_TYPE ID ROUND_LEFT ROUND_RIGHT STATEMENTS_BLOCK  */
-                if (yyn == 83)
-                    /* "Whkcc.y":432  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 84: /* STATEMENT_FUNC_DEF: FUNCTION FUNC_DEF_TYPE ID ROUND_LEFT SINGLE_RECV_FUNC_ARG RECV_FUNC_ARGS ROUND_RIGHT STATEMENTS_BLOCK  */
-                if (yyn == 84)
-                    /* "Whkcc.y":433  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 85: /* RECV_FUNC_ARGS: COMMA SINGLE_RECV_FUNC_ARG RECV_FUNC_ARGS  */
-                if (yyn == 85)
-                    /* "Whkcc.y":437  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 86: /* RECV_FUNC_ARGS: %empty  */
-                if (yyn == 86)
-                    /* "Whkcc.y":438  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 87: /* SINGLE_RECV_FUNC_ARG: FUNC_DEF_TYPE ID  */
-                if (yyn == 87)
-                    /* "Whkcc.y":442  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 88: /* SINGLE_RECV_FUNC_ARG: FUNC_DEF_TYPE RECV_HD_ARRAY  */
-                if (yyn == 88)
-                    /* "Whkcc.y":443  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 89: /* RECV_HD_ARRAY: ID SQUARE_LEFT SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM  */
-                if (yyn == 89)
-                    /* "Whkcc.y":447  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 90: /* RECV_HD_ARRAY: ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM  */
-                if (yyn == 90)
-                    /* "Whkcc.y":448  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 91: /* MORE_RECV_HD_ARRAY_DIM: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM  */
-                if (yyn == 91)
-                    /* "Whkcc.y":452  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 92: /* MORE_RECV_HD_ARRAY_DIM: %empty  */
-                if (yyn == 92)
-                    /* "Whkcc.y":453  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 93: /* DT_STRUCT: STRUCT ID  */
-                if (yyn == 93)
-                    /* "Whkcc.y":457  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 94: /* DT_POINTER: VAR_DEF_TYPE STAR  */
-                if (yyn == 94)
-                    /* "Whkcc.y":461  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 95: /* VAR_DEF_TYPE: DT_INTEGER  */
-                if (yyn == 95)
-                    /* "Whkcc.y":465  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 96: /* VAR_DEF_TYPE: DT_FLOAT  */
-                if (yyn == 96)
-                    /* "Whkcc.y":466  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 97: /* VAR_DEF_TYPE: DT_BOOLEAN  */
-                if (yyn == 97)
-                    /* "Whkcc.y":467  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 98: /* VAR_DEF_TYPE: DT_STRUCT  */
-                if (yyn == 98)
-                    /* "Whkcc.y":468  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 99: /* FUNC_DEF_TYPE: DT_INTEGER  */
-                if (yyn == 99)
-                    /* "Whkcc.y":472  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 100: /* FUNC_DEF_TYPE: DT_FLOAT  */
-                if (yyn == 100)
-                    /* "Whkcc.y":473  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 101: /* FUNC_DEF_TYPE: DT_BOOLEAN  */
-                if (yyn == 101)
-                    /* "Whkcc.y":474  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-
-            case 102: /* FUNC_DEF_TYPE: DT_POINTER  */
-                if (yyn == 102)
-                    /* "Whkcc.y":475  */ {
-                    wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
-                }
-                ;
-                break;
-
-            default:
-                break;
+        if (yyn >= 2 && yyn <= 102) {
+            wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);
         }
 
         yystack.pop(yylen);
-        yylen = 0;
-        /* Shift the result of the reduction.  */
+
         int yystate = yyLRGotoState(yystack.stateAt(0), yyr1_[yyn]);
         yystack.push(yystate, yyval);
         return YYNEWSTATE;
@@ -1606,9 +467,9 @@ public class Whkcc {
 
         private YYStack yystack;
 
-
         /**
          * 获取当前lookahead token的类别
+         *
          * @return 当前lookahead token的类别
          */
         public final SymbolKind getToken() {
@@ -1618,26 +479,12 @@ public class Whkcc {
         private SymbolKind yytoken;
         static final int NTOKENS = Whkcc.YYNTOKENS_;
 
-        /**
-         * Put in YYARG at most YYARGN of the expected tokens given the
-         * current YYCTX, and return the number of tokens stored in YYARG.  If
-         * YYARG is null, return the number of expected tokens (guaranteed to
-         * be less than YYNTOKENS).
-         */
-        int getExpectedTokens(SymbolKind yyarg[], int yyargn) {
-            return getExpectedTokens(yyarg, 0, yyargn);
-        }
-
         int getExpectedTokens(SymbolKind yyarg[], int yyoffset, int yyargn) {
             int yycount = yyoffset;
             int yyn = yypact_[this.yystack.stateAt(0)];
             if (!yyPactValueIsDefault(yyn)) {
-          /* Start YYX at -YYN if negative to avoid negative
-             indexes in YYCHECK.  In other words, skip the first
-             -YYN actions for this state because they are default
-             actions.  */
+
                 int yyxbegin = yyn < 0 ? -yyn : 0;
-                /* Stay within bounds of both yycheck and yytname.  */
                 int yychecklim = YYLAST_ - yyn + 1;
                 int yyxend = yychecklim < NTOKENS ? yychecklim : NTOKENS;
                 for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
@@ -1657,34 +504,8 @@ public class Whkcc {
         }
     }
 
-
     private int yysyntaxErrorArguments(Context yyctx, SymbolKind[] yyarg, int yyargn) {
-    /* There are many possibilities here to consider:
-       - If this state is a consistent state with a default action,
-         then the only way this function was invoked is if the
-         default action is an error action.  In that case, don't
-         check for expected tokens because there are none.
-       - The only way there can be no lookahead present (in tok) is
-         if this state is a consistent state with a default action.
-         Thus, detecting the absence of a lookahead is sufficient to
-         determine that there is no unexpected or expected token to
-         report.  In that case, just report a simple "syntax error".
-       - Don't assume there isn't a lookahead just because this
-         state is a consistent state with a default action.  There
-         might have been a previous inconsistent state, consistent
-         state with a non-default action, or user semantic action
-         that manipulated yychar.  (However, yychar is currently out
-         of scope during semantic actions.)
-       - Of course, the expected token list depends on states to
-         have correct lookahead information, and it depends on the
-         parser not to perform extra reductions after fetching a
-         lookahead from the scanner and before detecting a syntax
-         error.  Thus, state merging (from LALR or IELR) and default
-         reductions corrupt the expected token list.  However, the
-         list is correct for canonical LR with one exception: it
-         will still contain any token that will not be accepted due
-         to an error action in a later state.
-    */
+
         int yycount = 0;
         if (yyctx.getToken() != null) {
             if (yyarg != null)
@@ -1732,21 +553,10 @@ public class Whkcc {
         }
     }
 
-    /**
-     * Whether the given <code>yypact_</code> value indicates a defaulted state.
-     *
-     * @param yyvalue the value to check
-     */
     private static boolean yyPactValueIsDefault(int yyvalue) {
         return yyvalue == yypact_ninf_;
     }
 
-    /**
-     * Whether the given <code>yytable_</code>
-     * value indicates a syntax error.
-     *
-     * @param yyvalue the value to check
-     */
     private static boolean yyTableValueIsError(int yyvalue) {
         return yyvalue == yytable_ninf_;
     }
@@ -1754,8 +564,6 @@ public class Whkcc {
     private static final short yypact_ninf_ = -170;
     private static final short yytable_ninf_ = -102;
 
-    /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-   STATE-NUM.  */
     private static final short[] yypact_ = yypact_init();
 
     private static final short[] yypact_init() {
@@ -1784,9 +592,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-   Performed when YYTABLE does not specify something else to do.  Zero
-   means the default is an error.  */
     private static final byte[] yydefact_ = yydefact_init();
 
     private static final byte[] yydefact_init() {
@@ -1815,7 +620,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYPGOTO[NTERM-NUM].  */
     private static final short[] yypgoto_ = yypgoto_init();
 
     private static final short[] yypgoto_init() {
@@ -1828,7 +632,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYDEFGOTO[NTERM-NUM].  */
     private static final short[] yydefgoto_ = yydefgoto_init();
 
     private static final short[] yydefgoto_init() {
@@ -1841,9 +644,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-   positive, shift that token.  If negative, reduce the rule whose
-   number is the opposite.  If YYTABLE_NINF, syntax error.  */
     private static final short[] yytable_ = yytable_init();
 
     private static final short[] yytable_init() {
@@ -1964,8 +764,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-   symbol of state STATE-NUM.  */
     private static final byte[] yystos_ = yystos_init();
 
     private static final byte[] yystos_init() {
@@ -1994,7 +792,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
     private static final byte[] yyr1_ = yyr1_init();
 
     private static final byte[] yyr1_init() {
@@ -2014,7 +811,6 @@ public class Whkcc {
                 };
     }
 
-    /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
     private static final byte[] yyr2_ = yyr2_init();
 
     private static final byte[] yyr2_init() {
@@ -2034,9 +830,6 @@ public class Whkcc {
                 };
     }
 
-
-    /* YYTRANSLATE_(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
-     as returned by yylex, with out-of-bounds checking.  */
     private static final SymbolKind yytranslate_(int t) {
         // Last valid token kind.
         int code_max = 300;
@@ -2087,14 +880,10 @@ public class Whkcc {
                 };
     }
 
-
     private static final int YYLAST_ = 518;
     private static final int YYEMPTY_ = -2;
     private static final int YYFINAL_ = 21;
     private static final int YYNTOKENS_ = 46;
-
-    /* Unqualified %code blocks.  */
-    /* "Whkcc.y":14  */
 
     /**
      * 读入词法分析器输出的程序token列表并解析其抽象语法树
@@ -2104,13 +893,9 @@ public class Whkcc {
      */
     public boolean parseMe() throws java.io.IOException {
 
-
-        /* Lookahead token kind.  */
         int yychar = YYEMPTY_;
-        /* Lookahead symbol kind.  */
         SymbolKind yytoken = null;
 
-        /* State.  */
         int yyn = 0;
         int yylen = 0;
         int yystate = 0;
@@ -2118,59 +903,43 @@ public class Whkcc {
         YYStack yystack = new YYStack();
         int label = YYNEWSTATE;
 
-
-
-        /* Semantic value of the lookahead.  */
         Object yylval = null;
 
         yyerrstatus_ = 0;
-        yynerrs = 0;
 
-        /* Initialize the stack.  */
         yystack.push(yystate, yylval);
-
 
         for (; ; )
             switch (label) {
-                /* New state.  the state is already pushed when we come here.  */
                 case YYNEWSTATE:
 
-                    /* Accept */
                     if (yystate == YYFINAL_)
                         return true;
 
-                    /* Take a decision.  First try without lookahead.  */
                     yyn = yypact_[yystate];
                     if (yyPactValueIsDefault(yyn)) {
                         label = YYDEFAULT;
                         break;
                     }
 
-                    /* Read a lookahead token.  */
                     if (yychar == YYEMPTY_) {
-
                         yychar = yylexer.yylex();
                         yylval = yylexer.getLVal();
                         yylpos = wl.getLPosition();
-
                     }
 
-                    /* Convert token to internal form.  */
                     yytoken = yytranslate_(yychar);
 
                     if (yytoken == SymbolKind.S_YYerror) {
-                        /* illegal token, report an error */
+
                         yychar = Lexer.YYUNDEF;
                         yytoken = SymbolKind.S_YYUNDEF;
                         label = YYERRTOKEN;
                     } else {
-                        /* If the proper action on seeing token YYTOKEN is to reduce or to
-                         detect an error, take that action.  */
                         yyn += yytoken.getCode();
                         if (yyn < 0 || YYLAST_ < yyn || yycheck_[yyn] != yytoken.getCode())
                             label = YYDEFAULT;
 
-                            /* <= 0 means reduce or error.  */
                         else if ((yyn = yytable_[yyn]) <= 0) {
                             if (yyTableValueIsError(yyn))
                                 label = YYERRLAB;
@@ -2179,12 +948,8 @@ public class Whkcc {
                                 label = YYREDUCE;
                             }
                         } else {
-                            /* Shift the lookahead token.  */
-                            /* Discard the token being shifted.  */
                             yychar = YYEMPTY_;
 
-                            /* Count tokens shifted since error; after three, turn off error
-                             status.  */
                             if (yyerrstatus_ > 0)
                                 --yyerrstatus_;
 
@@ -2196,9 +961,6 @@ public class Whkcc {
                     }
                     break;
 
-                /*-----------------------------------------------------------.
-                | yydefault -- do the default action for the current state.  |
-                `-----------------------------------------------------------*/
                 case YYDEFAULT:
                     yyn = yydefact_[yystate];
                     if (yyn == 0)
@@ -2207,18 +969,12 @@ public class Whkcc {
                         label = YYREDUCE;
                     break;
 
-                /*-----------------------------.
-                | yyreduce -- Do a reduction.  |
-                `-----------------------------*/
                 case YYREDUCE:
                     yylen = yyr2_[yyn];
                     label = yyaction(yyn, yystack, yylen);
                     yystate = yystack.stateAt(0);
                     break;
 
-                /*------------------------------------.
-                | yyerrlab -- here on detecting error |
-                `------------------------------------*/
                 case YYERRLAB:
                     if (yychar == YYEMPTY_)
                         yytoken = null;
@@ -2226,15 +982,11 @@ public class Whkcc {
                     label = YYABORT;
                     break;
 
-                /*-------------------------------------------------------------.
-                | yyerrtoken -- syntax error  |
-                `-------------------------------------------------------------*/
                 case YYERRTOKEN:
                     System.err.println("Invalid token at position " + yylpos);
                     label = YYABORT;
                     break;
 
-                /* Abort.  */
                 case YYABORT:
                     return false;
             }
@@ -2250,8 +1002,4 @@ public class Whkcc {
         wl.printASTree();
     }
 
-    /* "Whkcc.java":2333  */
-
 }
-/* "Whkcc.y":479  */
-
