@@ -20,6 +20,7 @@
 %left PLUS MINUS
 %left STAR DIVIDE MOD
 %precedence GET_ADDR
+%precedence DEREF
 %precedence POSITIVE NEGATIVE
 
 %nonassoc ELSE
@@ -55,7 +56,7 @@ STATEMENT
 	| STATEMENT_WHILE {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| STATEMENT_STRUCT_DEF {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| STATEMENT_RETURN {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	| FUNC_CALL SEMICOLON {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	| EXP_R SEMICOLON {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| SEMICOLON {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	;
 
@@ -81,6 +82,7 @@ EXP_R
 	| ROUND_LEFT EXP_R ROUND_RIGHT  {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| EXP_L {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| APSAND EXP_L %prec GET_ADDR {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	| STAR EXP_L %prec DEREF {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| CONST_STRING {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| NUMBER {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| FUNC_CALL {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
@@ -202,13 +204,8 @@ SINGLE_RECV_FUNC_ARG
 	;
 
 RECV_HD_ARRAY
-	: ID SQUARE_LEFT SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	;
-
-MORE_RECV_HD_ARRAY_DIM
-	: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	| {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	: ID SQUARE_LEFT SQUARE_RIGHT MORE_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	;
 
 DT_STRUCT

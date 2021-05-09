@@ -12,232 +12,153 @@
 }
 
 %code {
-	/**
-	 * Parse input from the scanner that was specified at object construction
-	 * time.  Return whether the end of the input was reached successfully.
-	 *
-	 * @return <tt>true</tt> if the parsing succeeds.  Note that this does not
-	 * imply that there were no syntax errors.
-	 */
-	public boolean parseMe() throws java.io.IOException {
+    /**
+     * Parse input from the scanner that was specified at object construction
+     * time.  Return whether the end of the input was reached successfully.
+     *
+     * @return <tt>true</tt> if the parsing succeeds.  Note that this does not
+     * imply that there were no syntax errors.
+     */
+    public boolean parseMe() throws java.io.IOException {
 
 
-	    /* Lookahead token kind.  */
-	    int yychar = YYEMPTY_;
-	    /* Lookahead symbol kind.  */
-	    SymbolKind yytoken = null;
+	/* Lookahead token kind.  */
+	int yychar = YYEMPTY_;
+	/* Lookahead symbol kind.  */
+	SymbolKind yytoken = null;
 
-	    /* State.  */
-	    int yyn = 0;
-	    int yylen = 0;
-	    int yystate = 0;
-	    Position yylpos = null;
-	    YYStack yystack = new YYStack();
-	    int label = YYNEWSTATE;
-
-
-
-	    /* Semantic value of the lookahead.  */
-	    Object yylval = null;
-
-	    yyerrstatus_ = 0;
-	    yynerrs = 0;
-
-	    /* Initialize the stack.  */
-	    yystack.push(yystate, yylval);
-
-
-	    for (; ; )
-		switch (label) {
-		    /* New state.  the state is already pushed when we come here.  */
-		    case YYNEWSTATE:
-
-			/* Accept?  */
-			if (yystate == YYFINAL_)
-			    return true;
-
-			/* Take a decision.  First try without lookahead.  */
-			yyn = yypact_[yystate];
-			if (yyPactValueIsDefault(yyn)) {
-			    label = YYDEFAULT;
-			    break;
-			}
-
-			/* Read a lookahead token.  */
-			if (yychar == YYEMPTY_) {
-
-			    yychar = yylexer.yylex();
-			    yylval = yylexer.getLVal();
-			    yylpos = wl.getLPosition();
-
-			}
-
-			/* Convert token to internal form.  */
-			yytoken = yytranslate_(yychar);
-
-			if (yytoken == SymbolKind.S_YYerror) {
-			    // The scanner already issued an error message, process directly
-			    // to error recovery.  But do not keep the error token as
-			    // lookahead, it is too special and may lead us to an endless
-			    // loop in error recovery. */
-			    yychar = Lexer.YYUNDEF;
-			    yytoken = SymbolKind.S_YYUNDEF;
-			    label = YYERRLAB1;
-			} else {
-			    /* If the proper action on seeing token YYTOKEN is to reduce or to
-			     detect an error, take that action.  */
-			    yyn += yytoken.getCode();
-			    if (yyn < 0 || YYLAST_ < yyn || yycheck_[yyn] != yytoken.getCode())
-				label = YYDEFAULT;
-
-			    /* <= 0 means reduce or error.  */
-			    else if ((yyn = yytable_[yyn]) <= 0) {
-				if (yyTableValueIsError(yyn))
-				    label = YYERRLAB;
-				else {
-				    yyn = -yyn;
-				    label = YYREDUCE;
-				}
-			    } else {
-				/* Shift the lookahead token.  */
-				/* Discard the token being shifted.  */
-				yychar = YYEMPTY_;
-
-				/* Count tokens shifted since error; after three, turn off error
-				 status.  */
-				if (yyerrstatus_ > 0)
-				    --yyerrstatus_;
-
-				yystate = yyn;
-				yystack.push(yystate, yylval);
-				wl.addTerminalNode(yytoken, yylpos, yylval);
-				label = YYNEWSTATE;
-			    }
-			}
-			break;
-
-		    /*-----------------------------------------------------------.
-		    | yydefault -- do the default action for the current state.  |
-		    `-----------------------------------------------------------*/
-		    case YYDEFAULT:
-			yyn = yydefact_[yystate];
-			if (yyn == 0)
-			    label = YYERRLAB;
-			else
-			    label = YYREDUCE;
-			break;
-
-		    /*-----------------------------.
-		    | yyreduce -- Do a reduction.  |
-		    `-----------------------------*/
-		    case YYREDUCE:
-			yylen = yyr2_[yyn];
-			label = yyaction(yyn, yystack, yylen);
-			yystate = yystack.stateAt(0);
-			break;
-
-		    /*------------------------------------.
-		    | yyerrlab -- here on detecting error |
-		    `------------------------------------*/
-		    case YYERRLAB:
-			/* If not already recovering from an error, report this error.  */
-			if (yyerrstatus_ == 0) {
-			    ++yynerrs;
-			    if (yychar == YYEMPTY_)
-				yytoken = null;
-			    yyreportSyntaxError(new Context(yystack, yytoken));
-			}
-
-			if (yyerrstatus_ == 3) {
-			    /* If just tried and failed to reuse lookahead token after an
-			     error, discard it.  */
-
-			    if (yychar <= Lexer.YYEOF) {
-				/* Return failure if at end of input.  */
-				if (yychar == Lexer.YYEOF)
-				    return false;
-			    } else
-				yychar = YYEMPTY_;
-			}
-
-			/* Else will try to reuse lookahead token after shifting the error
-			 token.  */
-			label = YYERRLAB1;
-			break;
-
-		    /*-------------------------------------------------.
-		    | errorlab -- error raised explicitly by YYERROR.  |
-		    `-------------------------------------------------*/
-		    case YYERROR:
-			/* Do not reclaim the symbols of the rule which action triggered
-			 this YYERROR.  */
-			yystack.pop(yylen);
-			yylen = 0;
-			yystate = yystack.stateAt(0);
-			label = YYERRLAB1;
-			break;
-
-		    /*-------------------------------------------------------------.
-		    | yyerrlab1 -- common code for both syntax error and YYERROR.  |
-		    `-------------------------------------------------------------*/
-		    case YYERRLAB1:
-			yyerrstatus_ = 3;       /* Each real token shifted decrements this.  */
-
-			// Pop stack until we find a state that shifts the error token.
-			for (; ; ) {
-			    yyn = yypact_[yystate];
-			    if (!yyPactValueIsDefault(yyn)) {
-				yyn += SymbolKind.S_YYerror.getCode();
-				if (0 <= yyn && yyn <= YYLAST_
-					&& yycheck_[yyn] == SymbolKind.S_YYerror.getCode()) {
-				    yyn = yytable_[yyn];
-				    if (0 < yyn)
-					break;
-				}
-			    }
-
-			    /* Pop the current state because it cannot handle the
-			     * error token.  */
-			    if (yystack.height == 0)
-				return false;
-
-
-			    yystack.pop();
-			    yystate = yystack.stateAt(0);
-			}
-
-			if (label == YYABORT)
-			    /* Leave the switch.  */
-			    break;
+	/* State.  */
+	int yyn = 0;
+	int yylen = 0;
+	int yystate = 0;
+	Position yylpos = null;
+	YYStack yystack = new YYStack();
+	int label = YYNEWSTATE;
 
 
 
-			/* Shift the error token.  */
+	/* Semantic value of the lookahead.  */
+	Object yylval = null;
 
-			yystate = yyn;
-			yystack.push(yyn, yylval);
-			wl.addTerminalNode(yytoken, yylpos, yylval);
-			label = YYNEWSTATE;
-			break;
+	yyerrstatus_ = 0;
+	yynerrs = 0;
 
-		    /* Accept.  */
-		    case YYACCEPT:
+	/* Initialize the stack.  */
+	yystack.push(yystate, yylval);
+
+
+	for (; ; )
+	    switch (label) {
+		/* New state.  the state is already pushed when we come here.  */
+		case YYNEWSTATE:
+
+		    /* Accept?  */
+		    if (yystate == YYFINAL_)
 			return true;
 
-		    /* Abort.  */
-		    case YYABORT:
-			return false;
-		}
-	}
+		    /* Take a decision.  First try without lookahead.  */
+		    yyn = yypact_[yystate];
+		    if (yyPactValueIsDefault(yyn)) {
+			label = YYDEFAULT;
+			break;
+		    }
 
-    private static final WhkccLexer wl = WhkccLexer.getWhkccLexer();
+		    /* Read a lookahead token.  */
+		    if (yychar == YYEMPTY_) {
 
-    public static void main(String[] args) throws IOException {
-        Whkcc p = new Whkcc(wl);
-        if (!p.parseMe()) {
-            System.exit(1);
-        }
-        wl.printASTree();
+			yychar = yylexer.yylex();
+			yylval = yylexer.getLVal();
+			yylpos = wl.getLPosition();
+
+		    }
+
+		    /* Convert token to internal form.  */
+		    yytoken = yytranslate_(yychar);
+
+		    if (yytoken == SymbolKind.S_YYerror) {
+			/* illegal token, report an error */
+			yychar = Lexer.YYUNDEF;
+			yytoken = SymbolKind.S_YYUNDEF;
+			label = YYERRTOKEN;
+		    } else {
+			/* If the proper action on seeing token YYTOKEN is to reduce or to
+			 detect an error, take that action.  */
+			yyn += yytoken.getCode();
+			if (yyn < 0 || YYLAST_ < yyn || yycheck_[yyn] != yytoken.getCode())
+			    label = YYDEFAULT;
+
+			    /* <= 0 means reduce or error.  */
+			else if ((yyn = yytable_[yyn]) <= 0) {
+			    if (yyTableValueIsError(yyn))
+				label = YYERRLAB;
+			    else {
+				yyn = -yyn;
+				label = YYREDUCE;
+			    }
+			} else {
+			    /* Shift the lookahead token.  */
+			    /* Discard the token being shifted.  */
+			    yychar = YYEMPTY_;
+
+			    /* Count tokens shifted since error; after three, turn off error
+			     status.  */
+			    if (yyerrstatus_ > 0)
+				--yyerrstatus_;
+
+			    yystate = yyn;
+			    yystack.push(yystate, yylval);
+			    wl.addTerminalNode(yytoken, yylpos, yylval);
+			    label = YYNEWSTATE;
+			}
+		    }
+		    break;
+
+		/*-----------------------------------------------------------.
+		| yydefault -- do the default action for the current state.  |
+		`-----------------------------------------------------------*/
+		case YYDEFAULT:
+		    yyn = yydefact_[yystate];
+		    if (yyn == 0)
+			label = YYERRLAB;
+		    else
+			label = YYREDUCE;
+		    break;
+
+		/*-----------------------------.
+		| yyreduce -- Do a reduction.  |
+		`-----------------------------*/
+		case YYREDUCE:
+		    yylen = yyr2_[yyn];
+		    label = yyaction(yyn, yystack, yylen);
+		    yystate = yystack.stateAt(0);
+		    break;
+
+		/*------------------------------------.
+		| yyerrlab -- here on detecting error |
+		`------------------------------------*/
+		case YYERRLAB:
+		    if (yychar == YYEMPTY_)
+			yytoken = null;
+		    yyreportSyntaxError(new Context(yystack, yytoken));
+		    label = YYABORT;
+		    break;
+
+		/*-------------------------------------------------------------.
+		| yyerrtoken -- syntax error  |
+		`-------------------------------------------------------------*/
+		case YYERRTOKEN:
+		    System.err.println("Invalid token at position " + yylpos);
+		    label = YYABORT;
+		    break;
+
+		/* Accept.  */
+		case YYACCEPT:
+		    return true;
+
+		/* Abort.  */
+		case YYABORT:
+		    return false;
+	    }
     }
 }
 %token DT_INTEGER DT_BOOLEAN DT_FLOAT STRUCT
@@ -262,6 +183,7 @@
 %left PLUS MINUS
 %left STAR DIVIDE MOD
 %precedence GET_ADDR
+%precedence DEREF
 %precedence POSITIVE NEGATIVE
 
 %nonassoc ELSE
@@ -297,7 +219,7 @@ STATEMENT
 	| STATEMENT_WHILE {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| STATEMENT_STRUCT_DEF {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| STATEMENT_RETURN {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	| FUNC_CALL SEMICOLON {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	| EXP_R SEMICOLON {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| SEMICOLON {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	;
 
@@ -323,6 +245,7 @@ EXP_R
 	| ROUND_LEFT EXP_R ROUND_RIGHT  {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| EXP_L {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| APSAND EXP_L %prec GET_ADDR {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	| STAR EXP_L %prec DEREF {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| CONST_STRING {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| NUMBER {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	| FUNC_CALL {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
@@ -444,13 +367,8 @@ SINGLE_RECV_FUNC_ARG
 	;
 
 RECV_HD_ARRAY
-	: ID SQUARE_LEFT SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	;
-
-MORE_RECV_HD_ARRAY_DIM
-	: SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_RECV_HD_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
-	| {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	: ID SQUARE_LEFT SQUARE_RIGHT MORE_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
+	| ID SQUARE_LEFT EXP_R SQUARE_RIGHT MORE_ARRAY_DIM {wl.addNonTerminalNode(Whkcc.SymbolKind.get(yyr1_[yyn]), yylen);}
 	;
 
 DT_STRUCT
