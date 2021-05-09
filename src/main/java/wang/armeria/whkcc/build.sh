@@ -11,16 +11,19 @@ while getopts "d:" arg; do
     esac
 done
 
-rm Whkcc.y
-touch Whkcc.y
-cat header.y >> Whkcc.y
-cat body.y >> Whkcc.y
+file_name=Whkcc_tmp
+
+touch $file_name.y
+cat header.y >> $file_name.y
+cat body.y >> $file_name.y
 if [ "$debug" -eq 0 ]; then
-    bison Whkcc.y -g -x --report=all --warnings=none
+    bison $file_name.y -g -x --report=all --warnings=none
 fi
 if [ "$debug" -eq 1 ]; then
-    bison Whkcc.y -g -x --report=all
+    bison $file_name.y -g -x --report=all
 fi
 if [ "$debug" -eq 2 ]; then
-    bison Whkcc.y -g -x --report=all -Wcounterexamples
+    bison $file_name.y -g -x --report=all -Wcounterexamples
 fi
+
+rm $file_name.y

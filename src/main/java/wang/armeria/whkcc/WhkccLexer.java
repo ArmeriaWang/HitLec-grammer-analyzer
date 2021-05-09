@@ -8,6 +8,9 @@ import wang.armeria.token.TokenType;
 
 import java.io.*;
 
+/**
+ * 包含抽象语法树AST的语法分析器类，采用单例模式
+ */
 public class WhkccLexer implements Whkcc.Lexer {
 
     private final BufferedReader reader;
@@ -24,6 +27,10 @@ public class WhkccLexer implements Whkcc.Lexer {
         tree.addTerminalNode(Whkcc.SymbolKind.S_YYACCEPT, new Position(1, 0), null);
     }
 
+    /**
+     * 获取本类的唯一实例
+     * @return 本类的唯一实例
+     */
     public static WhkccLexer getWhkccLexer() {
         if (singleInstance == null) {
             try {
@@ -48,6 +55,10 @@ public class WhkccLexer implements Whkcc.Lexer {
         return yylval;
     }
 
+    /**
+     * 获取最后读入的token的程序位置
+     * @return 最后读入的token的程序位置
+     */
     public Position getLPosition() {
         return yylpos;
     }
@@ -79,15 +90,29 @@ public class WhkccLexer implements Whkcc.Lexer {
         }
     }
 
-
+    /**
+     * 向AST中添加终结符节点
+     * @param symbolKind 符号类型
+     * @param position 程序位置
+     * @param value 符号语义值（字面值、标识符需要非null值，其他类型传入null）
+     */
     public void addTerminalNode(Whkcc.SymbolKind symbolKind, Position position, Object value) {
         tree.addTerminalNode(symbolKind, position, value);
     }
 
+    /**
+     * 向AST中添加非终结符节点
+     * @param symbolKind 符号类型
+     * @param reduceSymbolsNum 需要规约的符号数
+     */
     public void addNonTerminalNode(Whkcc.SymbolKind symbolKind, int reduceSymbolsNum) {
         tree.addNonTerminalNode(symbolKind, reduceSymbolsNum);
     }
 
+    /**
+     * 按格式打印AST。仅当全部解析完成后才能调用
+     * @throws RuntimeException 根节点为null
+     */
     public void printASTree() {
         tree.printTree();
     }

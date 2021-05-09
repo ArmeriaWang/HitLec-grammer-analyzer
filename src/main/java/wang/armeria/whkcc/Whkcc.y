@@ -16,7 +16,7 @@
      * Parse input from the scanner that was specified at object construction
      * time.  Return whether the end of the input was reached successfully.
      *
-     * @return <tt>true</tt> if the parsing succeeds.  Note that this does not
+     * @return <code>true</code> if the parsing succeeds.  Note that this does not
      * imply that there were no syntax errors.
      */
     public boolean parseMe() throws java.io.IOException {
