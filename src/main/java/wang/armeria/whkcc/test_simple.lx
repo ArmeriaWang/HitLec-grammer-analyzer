@@ -632,14 +632,14 @@
 <61, 6>
 (IDENTIFIER   ,x)
 <61, 7>
-(LESS         ,)
+(LOGIC_AND    ,)
 <61, 9>
 (CONST_INTEGER,5)
-<61, 11>
-(ROUND_RIGHT  ,)
 <61, 12>
+(ROUND_RIGHT  ,)
+<61, 13>
 (BEGIN        ,)
-<61, 14>
+<61, 15>
 (KW_IF        ,)
 <62, 0>
 (ROUND_LEFT   ,)

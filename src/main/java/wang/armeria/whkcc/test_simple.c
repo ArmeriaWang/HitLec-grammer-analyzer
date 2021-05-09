@@ -58,7 +58,7 @@ function int main() {
 
     edge[99].from_node[1].weight = 1.123e7;
 
-    while (x < 5) {
+    while (x && 5) {
         if (y == -1) {
             y = 2;
         } else {

@@ -40,7 +40,7 @@ public class WhkccLexer implements Whkcc.Lexer {
     @Override
     public void yyerror(String s) {
         System.err.println(s);
-        System.out.println("Position at: " + tree.getLatestPosition());
+        System.err.println("Position at " + tree.getLatestPosition());
     }
 
     @Override
@@ -64,7 +64,12 @@ public class WhkccLexer implements Whkcc.Lexer {
                 return YYerror;
             }
 
-            Token token = Token.parseToken(line1, line2);
+            Token token;
+            try {
+                token = Token.parseToken(line1, line2);
+            } catch (IllegalArgumentException e) {
+                return YYerror;
+            }
             if (token.getTokenType() == TokenType.COMMENT) {
                 continue;
             }
