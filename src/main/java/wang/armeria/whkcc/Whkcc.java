@@ -191,7 +191,7 @@ public class Whkcc {
                 SymbolKind.S_FUNC_DEF_TYPE
         };
 
-        static final SymbolKind get(int code) {
+        static SymbolKind get(int code) {
             return values_[code];
         }
 
@@ -206,7 +206,7 @@ public class Whkcc {
 
         private static String yytnamerr_(String yystr) {
             if (yystr.charAt(0) == '"') {
-                StringBuffer yyr = new StringBuffer();
+                StringBuilder yyr = new StringBuilder();
                 strip_quotes:
                 for (int i = 1; i < yystr.length(); i++)
                     switch (yystr.charAt(i)) {
@@ -231,7 +231,7 @@ public class Whkcc {
 
         private static final String[] yytname_ = yytname_init();
 
-        private static final String[] yytname_init() {
+        private static String[] yytname_init() {
             return new String[]
                     {
                             "\"end of file\"", "error", "\"invalid token\"", "DT_INTEGER",
@@ -359,7 +359,7 @@ public class Whkcc {
         yylexer.yyerror(msg);
     }
 
-    private final class YYStack {
+    private static final class YYStack {
         private int[] stateStack = new int[16];
         private Object[] valueStack = new Object[16];
 
@@ -429,7 +429,6 @@ public class Whkcc {
     private static final int YYDEFAULT = 5;
     private static final int YYREDUCE = 6;
     private static final int YYERRTOKEN = 7;
-    private static final int YYRETURN = 8;
 
     private int yyerrstatus_ = 0;
 
@@ -465,7 +464,7 @@ public class Whkcc {
             yytoken = token;
         }
 
-        private YYStack yystack;
+        private final YYStack yystack;
 
         /**
          * 获取当前lookahead token的类别
@@ -476,17 +475,17 @@ public class Whkcc {
             return yytoken;
         }
 
-        private SymbolKind yytoken;
+        private final SymbolKind yytoken;
         static final int NTOKENS = Whkcc.YYNTOKENS_;
 
-        int getExpectedTokens(SymbolKind yyarg[], int yyoffset, int yyargn) {
+        int getExpectedTokens(SymbolKind[] yyarg, int yyoffset, int yyargn) {
             int yycount = yyoffset;
             int yyn = yypact_[this.yystack.stateAt(0)];
             if (!yyPactValueIsDefault(yyn)) {
 
                 int yyxbegin = yyn < 0 ? -yyn : 0;
                 int yychecklim = YYLAST_ - yyn + 1;
-                int yyxend = yychecklim < NTOKENS ? yychecklim : NTOKENS;
+                int yyxend = Math.min(yychecklim, NTOKENS);
                 for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
                     if (yycheck_[yyx + yyn] == yyx && yyx != SymbolKind.S_YYerror.getCode()
                             && !yyTableValueIsError(yytable_[yyx + yyn])) {
@@ -566,7 +565,7 @@ public class Whkcc {
 
     private static final short[] yypact_ = yypact_init();
 
-    private static final short[] yypact_init() {
+    private static short[] yypact_init() {
         return new short[]
                 {
                         80, -170, -170, -170, -2, 103, 16, -170, 80, 80,
@@ -594,7 +593,7 @@ public class Whkcc {
 
     private static final byte[] yydefact_ = yydefact_init();
 
-    private static final byte[] yydefact_init() {
+    private static byte[] yydefact_init() {
         return new byte[]
                 {
                         6, 95, 97, 96, 0, 0, 0, 2, 6, 6,
@@ -622,7 +621,7 @@ public class Whkcc {
 
     private static final short[] yypgoto_ = yypgoto_init();
 
-    private static final short[] yypgoto_init() {
+    private static short[] yypgoto_init() {
         return new short[]
                 {
                         -170, -170, 112, -86, 40, 5, -35, -32, 49, 62,
@@ -634,7 +633,7 @@ public class Whkcc {
 
     private static final short[] yydefgoto_ = yydefgoto_init();
 
-    private static final short[] yydefgoto_init() {
+    private static short[] yydefgoto_init() {
         return new short[]
                 {
                         0, 6, 7, 105, 141, 142, 54, 55, 56, 115,
@@ -646,7 +645,7 @@ public class Whkcc {
 
     private static final short[] yytable_ = yytable_init();
 
-    private static final short[] yytable_init() {
+    private static short[] yytable_init() {
         return new short[]
                 {
                         59, 19, 61, 146, 148, 150, 67, 25, 65, 185,
@@ -706,7 +705,7 @@ public class Whkcc {
 
     private static final short[] yycheck_ = yycheck_init();
 
-    private static final short[] yycheck_init() {
+    private static short[] yycheck_init() {
         return new short[]
                 {
                         35, 5, 39, 104, 104, 104, 43, 16, 16, 178,
@@ -766,7 +765,7 @@ public class Whkcc {
 
     private static final byte[] yystos_ = yystos_init();
 
-    private static final byte[] yystos_init() {
+    private static byte[] yystos_init() {
         return new byte[]
                 {
                         0, 3, 4, 5, 6, 11, 47, 48, 61, 66,
@@ -813,7 +812,7 @@ public class Whkcc {
 
     private static final byte[] yyr2_ = yyr2_init();
 
-    private static final byte[] yyr2_init() {
+    private static byte[] yyr2_init() {
         return new byte[]
                 {
                         0, 2, 1, 2, 2, 2, 0, 3, 2, 2,
@@ -830,7 +829,7 @@ public class Whkcc {
                 };
     }
 
-    private static final SymbolKind yytranslate_(int t) {
+    private static SymbolKind yytranslate_(int t) {
         // Last valid token kind.
         int code_max = 300;
         if (t <= 0)
@@ -843,7 +842,7 @@ public class Whkcc {
 
     private static final byte[] yytranslate_table_ = yytranslate_table_init();
 
-    private static final byte[] yytranslate_table_init() {
+    private static byte[] yytranslate_table_init() {
         return new byte[]
                 {
                         0, 2, 2, 2, 2, 2, 2, 2, 2, 2,

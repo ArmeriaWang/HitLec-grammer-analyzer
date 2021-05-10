@@ -3,7 +3,7 @@ package wang.armeria.token;
 import java.util.Objects;
 
 /**
- * 词法分析单元token
+ * 词法分析单元token（Immutable）
  */
 public class Token {
 
