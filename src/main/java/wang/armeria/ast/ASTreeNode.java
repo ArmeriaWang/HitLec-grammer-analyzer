@@ -1,5 +1,7 @@
 package wang.armeria.ast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import wang.armeria.token.Position;
 import wang.armeria.whkcc.Whkcc;
 
@@ -15,6 +17,7 @@ public class ASTreeNode {
     private final Position position;
     private final Object value;
     private final List<ASTreeNode> children;
+    private final int producer;
     private ASTreeNode father;
 
     /**
@@ -22,13 +25,19 @@ public class ASTreeNode {
      * @param symbolKind 符号类型
      * @param position 程序位置
      * @param value 符号语义值
+     * @param producer 产生式编号（终结符为-1）
      */
-    public ASTreeNode(Whkcc.SymbolKind symbolKind, Position position, Object value) {
+    public ASTreeNode(Whkcc.SymbolKind symbolKind, Position position, Object value, int producer) {
         this.symbolKind = symbolKind;
         this.position = position;
         this.value = value;
+        this.producer = producer;
         children = new ArrayList<>();
         father = null;
+    }
+
+    public int getProducer() {
+        return producer;
     }
 
     /**
@@ -104,5 +113,31 @@ public class ASTreeNode {
                 return symbolKind.getName() + ": " + value + " " + position;
         }
         return symbolKind.getName() + " " + position;
+    }
+
+    public Element getDomElement(Document document, int rank) {
+        Element element = document.createElement("astNode");
+
+        Element symbolKind = document.createElement("symbolKind");
+        symbolKind.appendChild(document.createTextNode(String.valueOf(this.symbolKind)));
+        element.appendChild(symbolKind);
+
+        Element position = document.createElement("position");
+        position.appendChild(document.createTextNode(String.valueOf(this.position)));
+        element.appendChild(position);
+
+        Element value = document.createElement("value");
+        value.appendChild(document.createTextNode(String.valueOf(this.value)));
+        element.appendChild(value);
+
+        Element producer = document.createElement("producer");
+        producer.appendChild(document.createTextNode(String.valueOf(this.producer)));
+        element.appendChild(producer);
+
+        Element sonRank = document.createElement("sonRank");
+        sonRank.appendChild(document.createTextNode(String.valueOf(rank)));
+        element.appendChild(sonRank);
+
+        return element;
     }
 }

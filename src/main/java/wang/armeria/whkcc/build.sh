@@ -11,8 +11,9 @@ while getopts "d:" arg; do
     esac
 done
 
-file_name=Whkcc_tmp
+file_name=Whkcc
 
+rm $file_name.y
 touch $file_name.y
 cat header.y >> $file_name.y
 cat body.y >> $file_name.y
@@ -25,5 +26,3 @@ fi
 if [ "$debug" -eq 2 ]; then
     bison $file_name.y -g -x --report=all -Wcounterexamples
 fi
-
-rm $file_name.y

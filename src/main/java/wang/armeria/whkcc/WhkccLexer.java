@@ -17,7 +17,7 @@ public class WhkccLexer implements Whkcc.Lexer {
     private final ASTree tree;
     private Object yylval;
     private Position yylpos;
-    private static final File inputFile = new File("src/main/java/wang/armeria/whkcc/test_simple.lx");
+    //    private static final File inputFile = new File("report/test_simple.lx");
     private static WhkccLexer singleInstance = null;
 
     private WhkccLexer(InputStream is) {
@@ -29,17 +29,12 @@ public class WhkccLexer implements Whkcc.Lexer {
 
     /**
      * 获取本类的唯一实例
+     *
      * @return 本类的唯一实例
      */
     public static WhkccLexer getWhkccLexer() {
         if (singleInstance == null) {
-            try {
-                singleInstance = new WhkccLexer(new FileInputStream(inputFile));
-            }
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-                throw new RuntimeException();
-            }
+            singleInstance = new WhkccLexer(System.in);
         }
         return singleInstance;
     }
@@ -57,6 +52,7 @@ public class WhkccLexer implements Whkcc.Lexer {
 
     /**
      * 获取最后读入的token的程序位置
+     *
      * @return 最后读入的token的程序位置
      */
     public Position getLPosition() {
@@ -78,7 +74,8 @@ public class WhkccLexer implements Whkcc.Lexer {
             Token token;
             try {
                 token = Token.parseToken(line1, line2);
-            } catch (IllegalArgumentException e) {
+            }
+            catch (IllegalArgumentException e) {
                 return YYerror;
             }
             if (token.getTokenType() == TokenType.COMMENT) {
@@ -92,9 +89,10 @@ public class WhkccLexer implements Whkcc.Lexer {
 
     /**
      * 向AST中添加终结符节点
+     *
      * @param symbolKind 符号类型
-     * @param position 程序位置
-     * @param value 符号语义值（字面值、标识符需要非null值，其他类型传入null）
+     * @param position   程序位置
+     * @param value      符号语义值（字面值、标识符需要非null值，其他类型传入null）
      */
     public void addTerminalNode(Whkcc.SymbolKind symbolKind, Position position, Object value) {
         tree.addTerminalNode(symbolKind, position, value);
@@ -102,15 +100,17 @@ public class WhkccLexer implements Whkcc.Lexer {
 
     /**
      * 向AST中添加非终结符节点
-     * @param symbolKind 符号类型
+     *
+     * @param symbolKind       符号类型
      * @param reduceSymbolsNum 需要规约的符号数
      */
-    public void addNonTerminalNode(Whkcc.SymbolKind symbolKind, int reduceSymbolsNum) {
-        tree.addNonTerminalNode(symbolKind, reduceSymbolsNum);
+    public void addNonTerminalNode(Whkcc.SymbolKind symbolKind, int reduceSymbolsNum, int producer) {
+        tree.addNonTerminalNode(symbolKind, reduceSymbolsNum, producer);
     }
 
     /**
      * 按格式打印AST。仅当全部解析完成后才能调用
+     *
      * @throws RuntimeException 根节点为null
      */
     public void printASTree() {

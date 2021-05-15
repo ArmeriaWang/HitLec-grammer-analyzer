@@ -77,6 +77,8 @@ public class Utils {
                 return Whkcc.Lexer.LAND;
             case LOGIC_OR:
                 return Whkcc.Lexer.LOR;
+            case LOGIC_NOT:
+                return Whkcc.Lexer.LNOT;
             case AMPERSAND:
                 return Whkcc.Lexer.APSAND;
             case BIT_OR:
